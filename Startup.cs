@@ -44,7 +44,7 @@ namespace PrecacheManagerServer
 
             app.UseCors(builder =>
                 builder
-                .WithOrigins("http://localhost:8080")
+                .WithOrigins("*")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()
