@@ -12,21 +12,21 @@ namespace PrecacheManagerServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SitesController : ControllerBase
+    public class PrecacheSiteController : ControllerBase
     {
 
-        private static ConcurrentBag<Site> SiteCollection = new ConcurrentBag<Site>()
+        private static ConcurrentBag<PrecacheSite> PrecacheSiteCollection = new ConcurrentBag<PrecacheSite>()
         {
-            new Site() { Name = "Test INT Site", ApplicationMode = ApplicationMode.International },
-            new Site() { Name = "Test AUS Site", ApplicationMode = ApplicationMode.Australia },
-            new Site() { Name = "Test GERMANY MEDIA Site", ApplicationMode = ApplicationMode.GermanyMedia }
+            new PrecacheSite() { Name = "Test INT Site", ApplicationMode = ApplicationMode.International },
+            new PrecacheSite() { Name = "Test AUS Site", ApplicationMode = ApplicationMode.Australia },
+            new PrecacheSite() { Name = "Test GERMANY MEDIA Site", ApplicationMode = ApplicationMode.GermanyMedia }
         };
 
 
         [HttpGet]
-        public IEnumerable<Site> GetSites()
+        public IEnumerable<PrecacheSite> GetSites()
         {
-            return SiteCollection;
+            return PrecacheSiteCollection;
         }
 
 
