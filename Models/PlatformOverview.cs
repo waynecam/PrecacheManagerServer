@@ -13,7 +13,7 @@ namespace PrecacheManagerServer.Models
 
         public string PlatformDescription { get { return ApplicationMode.ToString(); } }
 
-        public List<Site> Sites { get; set; }
+        public List<PrecacheSite> PrecacheSites { get; set; }
 
 
 

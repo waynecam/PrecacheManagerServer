@@ -16,9 +16,9 @@ namespace PrecacheManagerServer.Controllers
         private ConcurrentBag<PlatformOverview> PlatformOverViewCollection = new ConcurrentBag<PlatformOverview>()
         {
             new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.International,
-                Sites = new List<Site>(){new Site(){ ID=20, ApplicationMode=Enums.ApplicationMode.International, Name="International Clientsite 1" }} },
+                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){ ID=20, ApplicationMode=Enums.ApplicationMode.International, Name="International Clientsite 1" }} },
             new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.GermanyMedia,
-                Sites = new List<Site>(){new Site(){ ID=21, ApplicationMode=Enums.ApplicationMode.GermanyMedia,Name="Germany ClientSite 1" }} }
+                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){ ID=21, ApplicationMode=Enums.ApplicationMode.GermanyMedia,Name="Germany ClientSite 1" }} }
         };
 
 
