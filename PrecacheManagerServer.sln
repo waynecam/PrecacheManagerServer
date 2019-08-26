@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrecacheManagerServer", "PrecacheManagerServer.csproj", "{25E7ED50-4FC8-4438-96A8-52678AA5BF79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrecacheManagerServer.API", "PrecacheManagerServer.API.csproj", "{25E7ED50-4FC8-4438-96A8-52678AA5BF79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
