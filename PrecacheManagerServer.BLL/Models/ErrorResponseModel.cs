@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace PrecacheManagerServer.BLL.Models
 {
@@ -11,11 +11,11 @@ namespace PrecacheManagerServer.BLL.Models
         public string Message { get; set; }
         public string Exception { get; set; }
 
-        // other fields
+        //other fields
 
-        //public override string ToString()
-        //{
-        //    return JsonConvert.SerializeObject(this);
-        //}
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }
