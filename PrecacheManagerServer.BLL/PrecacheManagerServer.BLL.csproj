@@ -9,4 +9,8 @@
     <ProjectReference Include="..\PrecacheManagerServer.DAL\PrecacheManagerServer.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+
 </Project>
