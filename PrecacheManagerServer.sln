@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrecacheManagerServer.API", "PrecacheManagerServer.API.csproj", "{25E7ED50-4FC8-4438-96A8-52678AA5BF79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecacheManagerServer.DAL", "PrecacheManagerServer.DAL\PrecacheManagerServer.DAL.csproj", "{C2AC9CCC-F591-4EE0-A0A9-1BDDF1741C68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecacheManagerServer.BLL", "PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj", "{2241143B-8DE5-44D1-B13D-9EDB205D6458}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{25E7ED50-4FC8-4438-96A8-52678AA5BF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25E7ED50-4FC8-4438-96A8-52678AA5BF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25E7ED50-4FC8-4438-96A8-52678AA5BF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AC9CCC-F591-4EE0-A0A9-1BDDF1741C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AC9CCC-F591-4EE0-A0A9-1BDDF1741C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AC9CCC-F591-4EE0-A0A9-1BDDF1741C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AC9CCC-F591-4EE0-A0A9-1BDDF1741C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2241143B-8DE5-44D1-B13D-9EDB205D6458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2241143B-8DE5-44D1-B13D-9EDB205D6458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2241143B-8DE5-44D1-B13D-9EDB205D6458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2241143B-8DE5-44D1-B13D-9EDB205D6458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
