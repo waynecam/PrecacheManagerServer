@@ -3,16 +3,40 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using PrecacheManagerServer.DAL.Models;
+using PrecacheManagerServer.DAL.Mappers;
+using System.Data.SqlClient;
+using PrecacheManagerServer.DAL.Contexts;
+using AutoMapper;
 
 namespace PrecacheManagerServer.BLL.Repositorys
 {
     public class BaseRepository<T> : IBaseRepository<T> where T: BaseEntity
     {
-        public Task<IEnumerable<T>> GetAll()
+        private SqlConnection _sqlConnection;
+
+        private DBContext _dbContext;
+
+        private Mapper _mapper;
+
+        public BaseRepository(Mapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var dbTable = DBMapper.Mapper[type];
+
+            var sql = "SELECT * FROM [dbo].[" + dbTable + "]";
+
+            // Here we need to Map PreacheSearchItems to PrecacheItem objects and return
+            return await QueryHandlers.ExecuteQueryGetResult<T>(sql, _dbContext.SqlConnection, _mapper);
+
+            
+
         }
 
         public Task<T> GetById(int id)
