@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
+    <ProjectReference Include="..\PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
   </ItemGroup>
 
 </Project>
