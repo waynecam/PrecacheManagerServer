@@ -9,7 +9,7 @@ namespace PrecacheManagerServer.BLL.Services
 {
     public interface IBaseService<T> where T: BaseEntity
     {
-        Task<IEnumerable<T>> GetAsync();
+        Task<IEnumerable<T>> GetAsync(PlatformSettingsModel request);
 
         Task<T> GetById(int id);
 

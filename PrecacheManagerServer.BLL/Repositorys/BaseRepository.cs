@@ -16,14 +16,14 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
         private DBContext _dbContext;
 
-        private Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public BaseRepository(Mapper mapper)
+        public BaseRepository(IMapper mapper)
         {
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll(PlatformSettingsModel request)
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
@@ -33,9 +33,13 @@ namespace PrecacheManagerServer.BLL.Repositorys
             var sql = "SELECT * FROM [dbo].[" + dbTable + "]";
 
             // Here we need to Map PreacheSearchItems to PrecacheItem objects and return
-            return await QueryHandlers.ExecuteQueryGetResult<T>(sql, _dbContext.SqlConnection, _mapper);
+            //return await QueryHandlers.ExecuteQueryGetResult<T>(sql, _dbContext.SqlConnection, _mapper);
 
-            
+
+            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            return await QueryHandlers.ExecuteQueryGetResult<T>(sql, conn, _mapper);
+
+
 
         }
 

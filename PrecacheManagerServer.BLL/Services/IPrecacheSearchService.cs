@@ -9,7 +9,7 @@ namespace PrecacheManagerServer.BLL.Services
     public interface IPrecacheSearchService
     {
 
-        Task<IEnumerable<PrecacheSearchResponseModel>> GetAsync();
+        Task<IEnumerable<PrecacheSearchResponseModel>> GetAsync(PlatformSettingsRequestModel request);
         Task<PrecacheSearchResponseModel> GetById(int id);
 
         IEnumerable<PrecacheSearchResponseModel> Where(string sql);

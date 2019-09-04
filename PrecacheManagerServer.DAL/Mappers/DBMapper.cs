@@ -14,7 +14,7 @@ namespace PrecacheManagerServer.DAL.Mappers
     {
         public static Dictionary<Type, string> Mapper = new Dictionary<Type, string>()
         {
-            { typeof(IPrecacheSearch), "PrecacheSearchItem"}
+            { typeof(PrecacheSearch), "PrecacheSearchItem"}
         };
 
     }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PrecacheManagerServer.BLL.Models;
 
 namespace PrecacheManagerServer.BLL.Models
 {
-    public class PrecacheSearchResponseModel
+    public class PlatformSettingsRequestModel
     {
-        public int Id { get; set; }
+        public List<string> ConnectionStrings;
+
     }
 }

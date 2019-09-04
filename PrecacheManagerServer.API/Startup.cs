@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PrecacheManagerServer.API.Infrastructure;
+using AutoMapper;
 
 namespace PrecacheManagerServer
 {
@@ -25,8 +27,33 @@ namespace PrecacheManagerServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+
+            //// Add framework services.
+            //Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
+
+            //services.AddAutoMapper();
+
+            https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
+            services.AddAutoMapper(typeof(Startup));
+
+
+            //https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
+
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
+
+            Installer.ConfigureServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

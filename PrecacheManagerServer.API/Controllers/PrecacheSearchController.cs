@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
+using PrecacheManagerServer.BLL.Services;
+using PrecacheManagerServer.Enums;
 
 namespace PrecacheManagerServer.API.Controllers
 {
@@ -12,8 +16,9 @@ namespace PrecacheManagerServer.API.Controllers
     [ApiController]
     public class PrecacheSearchController : ControllerBase
     {
-        BLL.Services.IPrecacheSearchService _service;
-        public PrecacheSearchController(BLL.Services.IPrecacheSearchService service)
+        IPrecacheSearchService _service;
+        
+        public PrecacheSearchController(IPrecacheSearchService service)
         {
             _service = service;
         }
@@ -22,7 +27,12 @@ namespace PrecacheManagerServer.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<PrecacheSearchResponseModel>> Get()
         {
-            return await _service.GetAsync();
+
+            var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+            var conn = $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;";
+            platformSettingsRequestModel.ConnectionStrings = new List<string>() { conn };
+            return await _service.GetAsync(platformSettingsRequestModel);
         }
     }
 }

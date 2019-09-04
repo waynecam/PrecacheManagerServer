@@ -16,9 +16,9 @@ namespace PrecacheManagerServer.BLL.Services
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<T>> GetAsync()
+        public async Task<IEnumerable<T>> GetAsync(PlatformSettingsModel request)
         {
-            return await _repository.GetAll();
+            return await _repository.GetAll(request);
         }
 
         public async Task<T> GetById(int id)

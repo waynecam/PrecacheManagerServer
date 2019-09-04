@@ -10,7 +10,7 @@ namespace PrecacheManagerServer.DAL.Contexts
 {
     public static class QueryHandlers
     {
-        public static async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn, Mapper mapper)
+        public static async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn, IMapper mapper)
         {
 
             return await Task.Run(() =>
@@ -40,7 +40,7 @@ namespace PrecacheManagerServer.DAL.Contexts
 
 
 
-        public static List<T> DtToObjectMapper<T>(DataTable dt, Mapper mapper)
+        public static List<T> DtToObjectMapper<T>(DataTable dt, IMapper mapper)
         {
             //Mapper.CreateMap<IDataReader, T>();
             return mapper.Map<IDataReader, List<T>>(dt.CreateDataReader());
