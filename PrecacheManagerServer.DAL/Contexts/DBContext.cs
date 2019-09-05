@@ -47,13 +47,6 @@ namespace PrecacheManagerServer.DAL.Contexts
 
         public static List<T> DtToObjectMapper<T>(DataTable dt, IMapper mapper)
         {
-            //CreateMap<IDataReader, T>();
-            //var S = typeof(T);
-
-            //var d = new DataTable();
-            //d.Columns.Add("Id", typeof(int));
-            //d.Rows.Add(1);
-
             //return mapper.Map<IDataReader, List<T>>(d.CreateDataReader());
 
 

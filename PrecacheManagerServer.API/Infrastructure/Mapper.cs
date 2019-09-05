@@ -29,7 +29,23 @@ namespace PrecacheManagerServer.API.Infrastructure
             IMappingExpression<DataRow, PrecacheSearch> mappingExpression;
             mappingExpression = CreateMap<DataRow, PrecacheSearch>();
             mappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
+            mappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
+            mappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"]));
+            mappingExpression.ForMember(d => d.IsDeleted, o => o.MapFrom(s => s["IsDeleted"]));
+            mappingExpression.ForMember(d => d.DashboardSearchType, o => o.MapFrom(s => s["DashboardSearchType"]));
+            mappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
+            mappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
+            mappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            mappingExpression.ForMember(d => d.PrecacheKey, o => o.MapFrom(s => s["PrecacheKey"]));
+            mappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
+            mappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            mappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
+            mappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
+            mappingExpression.ForMember(d => d.AreaSearchName, o => o.MapFrom(s => s["AreaSearchName"]));
+            mappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
 
+
+            
 
             //CreateMap<Course, CourseResponseModel>();
             //CreateMap<CourseResponseModel, Course>();

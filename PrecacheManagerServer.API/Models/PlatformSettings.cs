@@ -6,17 +6,17 @@ using PrecacheManagerServer.Enums;
 
 namespace PrecacheManagerServer.API.Models
 {
-    public class PlatformSettings
+    public class PlatformSettings : IPlatformSettings
     {
 
-        Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
+        public Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
 
 
 
         public PlatformSettings()
         {
-            ConnectionStrings.Add(ApplicationMode.International, "INTERNATIONAL_CONNECTIONSTRING");
-            ConnectionStrings.Add(ApplicationMode.GermanyMedia  , "TMC_CONNECTIONSTRING");
+            ConnectionStrings = new Dictionary<ApplicationMode, string>();
+            ConnectionStrings.Add(ApplicationMode.International, $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;");
         }
 
     }

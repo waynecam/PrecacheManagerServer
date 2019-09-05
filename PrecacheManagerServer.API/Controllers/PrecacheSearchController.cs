@@ -17,10 +17,12 @@ namespace PrecacheManagerServer.API.Controllers
     public class PrecacheSearchController : ControllerBase
     {
         IPrecacheSearchService _service;
+        IPlatformSettings _platformSettings;
         
-        public PrecacheSearchController(IPrecacheSearchService service)
+        public PrecacheSearchController(IPrecacheSearchService service, IPlatformSettings platformSettings)
         {
             _service = service;
+            _platformSettings = platformSettings;
         }
 
 
@@ -30,8 +32,12 @@ namespace PrecacheManagerServer.API.Controllers
 
             var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-            var conn = $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;";
-            platformSettingsRequestModel.ConnectionStrings = new List<string>() { conn };
+            foreach(var key in _platformSettings.ConnectionStrings.Keys)
+            {
+                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+            }
+
+            
             return await _service.GetAsync(platformSettingsRequestModel);
         }
     }

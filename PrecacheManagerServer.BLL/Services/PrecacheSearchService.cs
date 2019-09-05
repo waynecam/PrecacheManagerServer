@@ -29,9 +29,9 @@ namespace PrecacheManagerServer.BLL.Services
             var arg = _mapper.Map<PlatformSettingsModel>(request);
             var result = await _service.GetAsync(arg);
 
-            //return result.Select(t => _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(t));
+            return result.Select(t => _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(t)).Take(10);
 
-            return new List<PrecacheSearchResponseModel>() { new PrecacheSearchResponseModel() { Id = 10 } };
+            //return new List<PrecacheSearchResponseModel>() { new PrecacheSearchResponseModel() { Id = 10 } };
         }
 
         public async Task<PrecacheSearchResponseModel> GetById(int id)
