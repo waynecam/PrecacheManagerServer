@@ -6,6 +6,7 @@ using AutoMapper;
 using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.API.Models;
+using System.Data;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
@@ -21,6 +22,14 @@ namespace PrecacheManagerServer.API.Infrastructure
             CreateMap<PlatformSettings, PlatformSettingsRequestModel>();
             //BLL > DAL
             CreateMap<PlatformSettingsRequestModel, PlatformSettingsModel>();
+            //CreateMap<IDataReader, PrecacheSearch>();
+            //CreateMap<PrecacheSearch, IDataReader>();
+
+            https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
+            IMappingExpression<DataRow, PrecacheSearch> mappingExpression;
+            mappingExpression = CreateMap<DataRow, PrecacheSearch>();
+            mappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
+
 
             //CreateMap<Course, CourseResponseModel>();
             //CreateMap<CourseResponseModel, Course>();

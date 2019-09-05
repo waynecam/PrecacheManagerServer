@@ -12,10 +12,6 @@ namespace PrecacheManagerServer.BLL.Repositorys
 {
     public class BaseRepository<T> : IBaseRepository<T> where T: BaseEntity
     {
-        private SqlConnection _sqlConnection;
-
-        private DBContext _dbContext;
-
         private readonly IMapper _mapper;
 
         public BaseRepository(IMapper mapper)
@@ -37,7 +33,7 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
 
             var conn = new SqlConnection(request.ConnectionStrings[0]);
-            return await QueryHandlers.ExecuteQueryGetResult<T>(sql, conn, _mapper);
+            return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
 
 
 

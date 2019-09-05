@@ -35,7 +35,8 @@ namespace PrecacheManagerServer
 
             //services.AddAutoMapper();
 
-            https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
+            //https://stackoverflow.com/questions/40275195/how-to-set-up-automapper-in-asp-net-core
+            //https://stackoverflow.com/questions/50411188/trying-to-add-automapper-to-asp-net-core-2
             services.AddAutoMapper(typeof(Startup));
 
 
