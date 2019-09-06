@@ -13,10 +13,12 @@ namespace PrecacheManagerServer.BLL.Repositorys
     public class BaseRepository<T> : IBaseRepository<T> where T: BaseEntity
     {
         private readonly IMapper _mapper;
+        private readonly IDBContext _dbContext;
 
-        public BaseRepository(IMapper mapper)
+        public BaseRepository(IMapper mapper, IDBContext dbContext)
         {
             _mapper = mapper;
+            _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<T>> GetAll(PlatformSettingsModel request)
@@ -24,7 +26,7 @@ namespace PrecacheManagerServer.BLL.Repositorys
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
             var type = typeof(T);
-            var dbTable = DBMapper.Mapper[type];
+            var dbTable = TableMapper.Mapper[type];
 
             var sql = "SELECT * FROM [dbo].[" + dbTable + "]";
 
@@ -33,7 +35,8 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
 
             var conn = new SqlConnection(request.ConnectionStrings[0]);
-            return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
+            //return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
+            return await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
 
 
 

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Repositorys;
 using PrecacheManagerServer.BLL.Services;
+using PrecacheManagerServer.DAL.Contexts;
+using PrecacheManagerServer.DAL.Mappers;
 using PrecacheManagerServer.DAL.Models;
 
 
@@ -21,6 +23,8 @@ namespace PrecacheManagerServer.API.Infrastructure
             services.AddTransient<IBaseService<PrecacheSearch>,BaseService<PrecacheSearch>>();
             services.AddTransient<IPrecacheSearchService,PrecacheSearchService>();
             services.AddTransient<IPlatformSettings, PlatformSettings>();
+            services.AddTransient<IDataMapper, DataMapper>();
+            services.AddTransient<IDBContext, DBContext>();
             //services.AddTransient<IErrorHandler, ErrorHandler>();
         }
     }

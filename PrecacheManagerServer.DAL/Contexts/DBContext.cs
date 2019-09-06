@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using PrecacheManagerServer.DAL.Mappers;
 
 namespace PrecacheManagerServer.DAL.Contexts
 {
@@ -13,9 +14,44 @@ namespace PrecacheManagerServer.DAL.Contexts
     /// <summary>
     /// This class wil return a dbcontext - containing details of a dynamically  built sqlconnection
     /// </summary>
-    public class DBContext
+    public class DBContext : IDBContext
     {
-        public static async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn, IMapper mapper)
+
+        private readonly IDataMapper _dataMapper;
+        public DBContext(IDataMapper dataMapper)
+        {
+            _dataMapper = dataMapper;
+        }
+        //public static async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn, IMapper mapper)
+        //{
+
+        //    return await Task.Run(() =>
+        //    {
+        //        var dt = new DataTable();
+        //        var result = new List<T>();
+
+
+        //        conn.Open();
+
+        //        using (var command = new SqlCommand(sql, conn))
+        //        {
+        //            var adp = new SqlDataAdapter(command);
+
+        //            adp.Fill(dt);
+
+        //        }
+        //        //return dt;
+
+        //        //result = DtToObjectMapper<T>(dt, mapper);
+        //        result = _dataMapper.DtToObjectMapper<T>(dt);
+
+        //        return result;
+        //    });
+
+
+        //}
+
+        public async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn)
         {
 
             return await Task.Run(() =>
@@ -35,7 +71,8 @@ namespace PrecacheManagerServer.DAL.Contexts
                 }
                 //return dt;
 
-                result = DtToObjectMapper<T>(dt, mapper);
+                //result = DtToObjectMapper<T>(dt, mapper);
+                result = _dataMapper.DtToObjectMapper<T>(dt);
 
                 return result;
             });
@@ -45,18 +82,18 @@ namespace PrecacheManagerServer.DAL.Contexts
 
 
 
-        public static List<T> DtToObjectMapper<T>(DataTable dt, IMapper mapper)
-        {
-            //return mapper.Map<IDataReader, List<T>>(d.CreateDataReader());
+        //public static List<T> DtToObjectMapper<T>(DataTable dt, IMapper mapper)
+        //{
+        //    //return mapper.Map<IDataReader, List<T>>(d.CreateDataReader());
 
 
-            var rows = new List<DataRow>(dt.Rows.OfType<DataRow>());
+        //    var rows = new List<DataRow>(dt.Rows.OfType<DataRow>());
 
-            List<T> result;
+        //    List<T> result;
 
-            result = mapper.Map<List<DataRow>, List<T>>(rows);
+        //    result = mapper.Map<List<DataRow>, List<T>>(rows);
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }
