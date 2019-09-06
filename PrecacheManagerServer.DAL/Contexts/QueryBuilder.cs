@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace PrecacheManagerServer.DAL.Contexts
 {
-    public static class QueryHandlers
+    public static class QueryBuilder
     {
         public static async Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn, IMapper mapper)
         {
