@@ -9,5 +9,7 @@ namespace PrecacheManagerServer.DAL.Models
         List<string> ConnectionStrings { get; set; }
 
         Dictionary<string, string> Where { get; set; }
+
+        string Sql { get; set; }
     }
 }

@@ -26,10 +26,10 @@ namespace PrecacheManagerServer.BLL.Repositorys
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
-            var type = typeof(T);
-            var dbTable = TableMapper.Mapper[type];
+            //var type = typeof(T);
+            //var dbTable = TableMapper.Mapper[type];
 
-            var sql = "SELECT * FROM [dbo].[" + dbTable + "]";
+            //var sql = "SELECT * FROM [dbo].[" + dbTable + "]";
 
             // Here we need to Map PreacheSearchItems to PrecacheItem objects and return
             //return await QueryHandlers.ExecuteQueryGetResult<T>(sql, _dbContext.SqlConnection, _mapper);
@@ -37,7 +37,7 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
             var conn = new SqlConnection(request.ConnectionStrings[0]);
             //return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
-            return await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
+            return await _dbContext.ExecuteQueryGetResult<T>(request.Sql, conn);
 
 
 
@@ -64,11 +64,12 @@ namespace PrecacheManagerServer.BLL.Repositorys
             return result.FirstOrDefault();
         }
 
-        public IEnumerable<T> Where(string sql)
+        public async Task<IEnumerable<T>> Where(PlatformSettingsModel request, string sql)
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
-            throw new NotImplementedException();
+            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            return await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
         }
     }
 }

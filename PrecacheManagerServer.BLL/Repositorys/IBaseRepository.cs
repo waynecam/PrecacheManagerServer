@@ -10,7 +10,6 @@ namespace PrecacheManagerServer.BLL.Repositorys
     {
         Task<IEnumerable<T>> GetAll(PlatformSettingsModel request);
         Task<T> GetById(PlatformSettingsModel request);
-        IEnumerable<T> Where(string sql);
       
     }
 }

@@ -11,7 +11,5 @@ namespace PrecacheManagerServer.BLL.Services
 
         Task<IEnumerable<PrecacheSearchResponseModel>> GetAsync(PlatformSettingsRequestModel request);
         Task<PrecacheSearchResponseModel> GetById(PlatformSettingsRequestModel request, int id);
-
-        IEnumerable<PrecacheSearchResponseModel> Where(string sql);
     }
 }

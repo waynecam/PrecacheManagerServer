@@ -14,5 +14,7 @@ namespace PrecacheManagerServer.DAL.Models
         public List<string> ConnectionStrings { get; set; }
 
         public Dictionary<string, string> Where { get; set; }
+
+        public string Sql { get; set; }
     }
 }

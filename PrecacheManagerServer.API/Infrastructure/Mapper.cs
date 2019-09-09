@@ -45,7 +45,12 @@ namespace PrecacheManagerServer.API.Infrastructure
             mappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
 
 
-            
+
+          
+            CreateMap<PlatformOverview, PlatformOverviewResponseModel>();
+            CreateMap<PlatformOverviewResponseModel, PlatformOverview>();
+
+
 
             //CreateMap<Course, CourseResponseModel>();
             //CreateMap<CourseResponseModel, Course>();

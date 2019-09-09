@@ -22,6 +22,11 @@ namespace PrecacheManagerServer.API.Infrastructure
             services.AddTransient<IBaseRepository<PrecacheSearch>,BaseRepository<PrecacheSearch>>();
             services.AddTransient<IBaseService<PrecacheSearch>,BaseService<PrecacheSearch>>();
             services.AddTransient<IPrecacheSearchService,PrecacheSearchService>();
+
+            services.AddTransient<IBaseRepository<PlatformOverview>, BaseRepository<PlatformOverview>>();
+            services.AddTransient<IBaseService<PlatformOverview>, BaseService<PlatformOverview>>();
+            services.AddTransient<IPlatformOverviewService, PlatformOverviewService>();
+
             services.AddTransient<IPlatformSettings, PlatformSettings>();
             services.AddTransient<IDataMapper, DataMapper>();
             services.AddTransient<IDBContext, DBContext>();

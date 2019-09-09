@@ -26,9 +26,6 @@ namespace PrecacheManagerServer.BLL.Services
             return await _repository.GetById(request);
         }
 
-        public IEnumerable<T> Where(string sql)
-        {
-            return _repository.Where(sql);
-        }
+        
     }
 }

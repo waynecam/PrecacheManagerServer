@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrecacheManagerServer.API.Models;
+using PrecacheManagerServer.BLL.Models;
+using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Models;
 
 namespace PrecacheManagerServer.Controllers
@@ -13,6 +16,11 @@ namespace PrecacheManagerServer.Controllers
     [ApiController]
     public class PlatformOverviewController : ControllerBase
     {
+
+        IPlatformOverviewService _service;
+        IPlatformSettings _platformSettings;
+
+
         private ConcurrentBag<PlatformOverview> PlatformOverViewCollection = new ConcurrentBag<PlatformOverview>()
         {
             new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.International,
@@ -22,11 +30,33 @@ namespace PrecacheManagerServer.Controllers
         };
 
 
-        [HttpGet]
-
-        public IEnumerable<PlatformOverview> GetPlatformOverviews()
+        public PlatformOverviewController(IPlatformOverviewService service, IPlatformSettings platformSetting)
         {
-            return PlatformOverViewCollection;
+            _service = service;
+            _platformSettings = platformSetting;
+        }
+
+
+
+        //[HttpGet]
+        //public IEnumerable<PlatformOverview> GetPlatformOverviews()
+        //{
+        //    //return PlatformOverViewCollection;
+        //}
+
+        [HttpGet]
+        public async Task<IEnumerable<PlatformOverviewResponseModel>> GetPlatformOverviews()
+        {
+
+            var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            {
+                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+            }
+
+            return await _service.GetAsync(platformSettingsRequestModel);
+        
         }
     }
 }

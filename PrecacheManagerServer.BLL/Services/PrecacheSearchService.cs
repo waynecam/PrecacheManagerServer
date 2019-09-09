@@ -6,6 +6,7 @@ using AutoMapper;
 using PrecacheManagerServer.BLL.Models;
 using System.Linq;
 using PrecacheManagerServer.DAL.Models;
+using PrecacheManagerServer.BLL.Enums;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -27,6 +28,11 @@ namespace PrecacheManagerServer.BLL.Services
 
             
             var arg = _mapper.Map<PlatformSettingsModel>(request);
+
+            var sql = "SELECT * FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() +"].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "]";
+
+            arg.Sql = sql;
+
             var result = await _service.GetAsync(arg);
 
             return result.Select(t => _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(t)).Take(10);
@@ -44,13 +50,11 @@ namespace PrecacheManagerServer.BLL.Services
             var arg = _mapper.Map<PlatformSettingsModel>(request);
             arg.Where.Add("id", id.ToString());
 
-            return _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(await _service.GetById(arg));
-        }
+            var sql = "SELECT * FROM [" + PrecacheDbTable.Clientsite.GetSchemaName() + "].[" + PrecacheDbTable.Clientsite.GetTableName() + "]";
 
-        public IEnumerable<PrecacheSearchResponseModel> Where(string sql)
-        {
-            var whereResult = _service.Where(sql).ToList();
-            return _mapper.Map<List<PrecacheSearch>, List<PrecacheSearchResponseModel>>(whereResult).AsEnumerable();
+            arg.Sql = sql;
+
+            return _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(await _service.GetById(arg));
         }
     }
 }

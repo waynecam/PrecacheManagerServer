@@ -8,6 +8,8 @@ namespace PrecacheManagerServer.BLL.Models
     {
         public List<string> ConnectionStrings;
 
+        public string Sql { get; set; }
+
         public PlatformSettingsRequestModel()
         {
             //read these from the config goign forward
