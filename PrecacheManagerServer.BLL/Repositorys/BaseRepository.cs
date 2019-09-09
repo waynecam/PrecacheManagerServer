@@ -7,6 +7,7 @@ using PrecacheManagerServer.DAL.Mappers;
 using System.Data.SqlClient;
 using PrecacheManagerServer.DAL.Contexts;
 using AutoMapper;
+using System.Linq;
 
 namespace PrecacheManagerServer.BLL.Repositorys
 {
@@ -42,11 +43,25 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
         }
 
-        public Task<T> GetById(int id)
+        public async Task<T> GetById(PlatformSettingsModel request)
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
-            throw new NotImplementedException();
+
+
+            var type = typeof(T);
+            var dbTable = TableMapper.Mapper[type];
+            var idColumn = request.Where.Keys.First();
+            var value = request.Where[idColumn];
+            var sql = "SELECT * FROM [dbo].[" + dbTable + "] WHERE " + idColumn + "= " + value;
+
+
+
+            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            //return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
+
+            var result = await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
+            return result.FirstOrDefault();
         }
 
         public IEnumerable<T> Where(string sql)

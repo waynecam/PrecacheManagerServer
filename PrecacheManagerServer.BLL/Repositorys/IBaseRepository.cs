@@ -9,7 +9,7 @@ namespace PrecacheManagerServer.BLL.Repositorys
     public interface IBaseRepository<T> where T : BaseEntity
     {
         Task<IEnumerable<T>> GetAll(PlatformSettingsModel request);
-        Task<T> GetById(int id);
+        Task<T> GetById(PlatformSettingsModel request);
         IEnumerable<T> Where(string sql);
       
     }

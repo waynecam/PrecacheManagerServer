@@ -15,7 +15,11 @@ namespace PrecacheManagerServer.BLL.Models
             ConnectionStrings = new List<string>();
             //var conn = $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;";
             //ConnectionStrings = new List<string>() { conn };
+
+            
         }
+
+       
 
     }
 }

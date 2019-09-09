@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -39,6 +40,20 @@ namespace PrecacheManagerServer.API.Controllers
 
             
             return await _service.GetAsync(platformSettingsRequestModel);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<PrecacheSearchResponseModel> Get([Required]int id)
+        {
+
+            var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            {
+                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+            }
+
+            return await _service.GetById(platformSettingsRequestModel, id);
         }
     }
 }

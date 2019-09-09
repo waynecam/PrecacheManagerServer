@@ -34,9 +34,17 @@ namespace PrecacheManagerServer.BLL.Services
             //return new List<PrecacheSearchResponseModel>() { new PrecacheSearchResponseModel() { Id = 10 } };
         }
 
-        public async Task<PrecacheSearchResponseModel> GetById(int id)
+        public async Task<PrecacheSearchResponseModel> GetById(PlatformSettingsRequestModel request, int id)
         {
-            return _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(await _service.GetById(id));
+
+            //use the type here to work out which column is the id column and pass to the base service class
+
+            //need to get the id column for the type in question
+
+            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            arg.Where.Add("id", id.ToString());
+
+            return _mapper.Map<PrecacheSearch, PrecacheSearchResponseModel>(await _service.GetById(arg));
         }
 
         public IEnumerable<PrecacheSearchResponseModel> Where(string sql)
