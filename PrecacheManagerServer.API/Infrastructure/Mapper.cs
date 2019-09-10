@@ -7,6 +7,7 @@ using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.API.Models;
 using System.Data;
+using PrecacheManagerServer.DAL.Enums;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
@@ -25,28 +26,57 @@ namespace PrecacheManagerServer.API.Infrastructure
             //CreateMap<IDataReader, PrecacheSearch>();
             //CreateMap<PrecacheSearch, IDataReader>();
 
-            https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
-            IMappingExpression<DataRow, PrecacheSearch> mappingExpression;
-            mappingExpression = CreateMap<DataRow, PrecacheSearch>();
-            mappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
-            mappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
-            mappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"]));
-            mappingExpression.ForMember(d => d.IsDeleted, o => o.MapFrom(s => s["IsDeleted"]));
-            mappingExpression.ForMember(d => d.DashboardSearchType, o => o.MapFrom(s => s["DashboardSearchType"]));
-            mappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
-            mappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
-            mappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
-            mappingExpression.ForMember(d => d.PrecacheKey, o => o.MapFrom(s => s["PrecacheKey"]));
-            mappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
-            mappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
-            mappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
-            mappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
-            mappingExpression.ForMember(d => d.AreaSearchName, o => o.MapFrom(s => s["AreaSearchName"]));
-            mappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
+
+
+            //https://stackoverflow.com/questions/18432173/auto-mapper-mapping-of-nested-object-within-a-collection
+            IMappingExpression<DataRow, PlatformOverview> platformOverviewMappingExpression;
+            platformOverviewMappingExpression = CreateMap<DataRow, PlatformOverview>();
+            platformOverviewMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            platformOverviewMappingExpression.ForMember(d => d.PrecacheSites, o => o.MapFrom(reader => new List<PrecacheSite>() { new PrecacheSite()
+            {
+                Name = reader["Sitename"].ToString(),
+                SiteId = Convert.ToInt32(reader["SiteId"].ToString()),
+                ApplicationMode = (ApplicationMode)Convert.ToInt32(reader["ApplicationMode"].ToString())
+            } }));
+
+            //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
+            IMappingExpression<DataRow, PrecacheSearch> precacheSearchMappingExpression;
+            precacheSearchMappingExpression = CreateMap<DataRow, PrecacheSearch>();
+            precacheSearchMappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
+            precacheSearchMappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
+            precacheSearchMappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"]));
+            precacheSearchMappingExpression.ForMember(d => d.IsDeleted, o => o.MapFrom(s => s["IsDeleted"]));
+            precacheSearchMappingExpression.ForMember(d => d.DashboardSearchType, o => o.MapFrom(s => s["DashboardSearchType"]));
+            precacheSearchMappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
+            precacheSearchMappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
+            precacheSearchMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            precacheSearchMappingExpression.ForMember(d => d.PrecacheKey, o => o.MapFrom(s => s["PrecacheKey"]));
+            precacheSearchMappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
+            precacheSearchMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            precacheSearchMappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
+            precacheSearchMappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
+            precacheSearchMappingExpression.ForMember(d => d.AreaSearchName, o => o.MapFrom(s => s["AreaSearchName"]));
+            precacheSearchMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
+
+
+            //is this neeeded?
+            //https://stackoverflow.com/questions/49152317/how-to-map-a-simple-poco-into-a-complex-object-hierachy-using-automapper
+            IMappingExpression<IDataReader, PrecacheSite> precacheSiteMappingExpression;
+            precacheSiteMappingExpression = CreateMap<IDataReader, PrecacheSite>();
+            precacheSiteMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            precacheSiteMappingExpression.ForMember(d => d.Name, o => o.MapFrom(s => s["Sitename"]));
+            precacheSiteMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+
+            //is this needed?
+            CreateMap<PlatformOverview, PrecacheSite>();
+            CreateMap<PrecacheSite, PlatformOverview>();
 
 
 
-          
+
+
+
+
             CreateMap<PlatformOverview, PlatformOverviewResponseModel>();
             CreateMap<PlatformOverviewResponseModel, PlatformOverview>();
 

@@ -7,9 +7,9 @@ using PrecacheManagerServer.Enums;
 
 namespace PrecacheManagerServer.DAL.Models
 {
-    public class PrecacheSite
+    public class PrecacheSite : IPrecacheSite
     {
-        public int ID { get; set; }
+        public int SiteId { get; set; }
 
         public string Name { get; set; }
 

@@ -48,6 +48,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[AreaSearchName]" +
                 "      ,[PrecacheIntegrityKey]" +
                 "	  ,cs.Sitename" +
+                "	  ,cs.Id as SiteId" +
                 "  FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "] psi"
                  + " JOIN  " +
                  "[" + PrecacheDbTable.Clientsite.GetSchemaName() + "].[" + PrecacheDbTable.Clientsite.GetTableName() + "] cs ON SiteID = cs.ID" +
