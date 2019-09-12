@@ -47,15 +47,30 @@ namespace PrecacheManagerServer.Controllers
         [HttpGet]
         public async Task<IEnumerable<PlatformOverviewResponseModel>> GetPlatformOverviews()
         {
+            var result = new List<PlatformOverviewResponseModel>();
 
-            var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+            
+
+            //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            //{
+            //    platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+            //}
 
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
-                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+                var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+                platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+
+                var  r = await _service.GetAsync(platformSettingsRequestModel);
+
+
+
+                result.AddRange(r.ToList().Take(3));
             }
 
-            return await _service.GetAsync(platformSettingsRequestModel);
+            return result;
         
         }
     }

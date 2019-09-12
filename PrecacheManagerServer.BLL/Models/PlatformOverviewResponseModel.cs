@@ -8,6 +8,11 @@ namespace PrecacheManagerServer.BLL.Models
 {
     public class PlatformOverviewResponseModel
     {
+        public PlatformOverviewResponseModel()
+        {
+            PrecacheSites = new List<PrecacheSite>();
+        }
+
         public ApplicationMode ApplicationMode { get; set; }
 
         public string PlatformDescription { get { return ApplicationMode.ToString(); } }

@@ -9,7 +9,8 @@ namespace PrecacheManagerServer.DAL.Enums
     {
         Australia = 0,
         Germany = 1,
-        GermanyMedia = 2,
-        International = 3
+        International = 2,
+        GermanyMedia = 4,
+       
     }
 }

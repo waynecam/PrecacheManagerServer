@@ -9,6 +9,12 @@ namespace PrecacheManagerServer.DAL.Models
 {
     public class PrecacheSite : IPrecacheSite
     {
+
+        public PrecacheSite()
+        {
+            PrecacheSearches = new List<PrecacheSearch>();
+        }
+
         public int SiteId { get; set; }
 
         public string Name { get; set; }

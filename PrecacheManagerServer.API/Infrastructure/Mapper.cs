@@ -28,16 +28,16 @@ namespace PrecacheManagerServer.API.Infrastructure
 
 
 
-            //https://stackoverflow.com/questions/18432173/auto-mapper-mapping-of-nested-object-within-a-collection
-            IMappingExpression<DataRow, PlatformOverview> platformOverviewMappingExpression;
-            platformOverviewMappingExpression = CreateMap<DataRow, PlatformOverview>();
-            platformOverviewMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
-            platformOverviewMappingExpression.ForMember(d => d.PrecacheSites, o => o.MapFrom(reader => new List<PrecacheSite>() { new PrecacheSite()
-            {
-                Name = reader["Sitename"].ToString(),
-                SiteId = Convert.ToInt32(reader["SiteId"].ToString()),
-                ApplicationMode = (ApplicationMode)Convert.ToInt32(reader["ApplicationMode"].ToString())
-            } }));
+            ////https://stackoverflow.com/questions/18432173/auto-mapper-mapping-of-nested-object-within-a-collection
+            //IMappingExpression<DataRow, PlatformOverview> platformOverviewMappingExpression;
+            //platformOverviewMappingExpression = CreateMap<DataRow, PlatformOverview>();
+            //platformOverviewMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            //platformOverviewMappingExpression.ForMember(d => d.PrecacheSites, o => o.MapFrom(reader => new List<PrecacheSite>() { new PrecacheSite()
+            //{
+            //    Name = reader["Sitename"].ToString(),
+            //    SiteId = Convert.ToInt32(reader["SiteId"].ToString()),
+            //    ApplicationMode = (ApplicationMode)Convert.ToInt32(reader["ApplicationMode"].ToString())
+            //} }));
 
             //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
             IMappingExpression<DataRow, PrecacheSearch> precacheSearchMappingExpression;
@@ -59,17 +59,39 @@ namespace PrecacheManagerServer.API.Infrastructure
             precacheSearchMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
 
 
-            //is this neeeded?
-            //https://stackoverflow.com/questions/49152317/how-to-map-a-simple-poco-into-a-complex-object-hierachy-using-automapper
-            IMappingExpression<IDataReader, PrecacheSite> precacheSiteMappingExpression;
-            precacheSiteMappingExpression = CreateMap<IDataReader, PrecacheSite>();
-            precacheSiteMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
-            precacheSiteMappingExpression.ForMember(d => d.Name, o => o.MapFrom(s => s["Sitename"]));
-            precacheSiteMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
 
-            //is this needed?
-            CreateMap<PlatformOverview, PrecacheSite>();
-            CreateMap<PrecacheSite, PlatformOverview>();
+            //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
+            IMappingExpression<DataRow, PlatformOverview> platformOverviewMappingExpression;
+            platformOverviewMappingExpression = CreateMap<DataRow, PlatformOverview>();
+            platformOverviewMappingExpression.ForMember(d => d.Name, o => o.MapFrom(s => s["Sitename"]));
+            platformOverviewMappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
+            platformOverviewMappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
+            platformOverviewMappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"]));
+            platformOverviewMappingExpression.ForMember(d => d.IsDeleted, o => o.MapFrom(s => s["IsDeleted"]));
+            platformOverviewMappingExpression.ForMember(d => d.DashboardSearchType, o => o.MapFrom(s => s["DashboardSearchType"]));
+            platformOverviewMappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
+            platformOverviewMappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
+            platformOverviewMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            platformOverviewMappingExpression.ForMember(d => d.PrecacheKey, o => o.MapFrom(s => s["PrecacheKey"]));
+            platformOverviewMappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
+            platformOverviewMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            platformOverviewMappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
+            platformOverviewMappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
+            platformOverviewMappingExpression.ForMember(d => d.AreaSearchName, o => o.MapFrom(s => s["AreaSearchName"]));
+            platformOverviewMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
+
+
+            ////is this neeeded?
+            ////https://stackoverflow.com/questions/49152317/how-to-map-a-simple-poco-into-a-complex-object-hierachy-using-automapper
+            //IMappingExpression<IDataReader, PrecacheSite> precacheSiteMappingExpression;
+            //precacheSiteMappingExpression = CreateMap<IDataReader, PrecacheSite>();
+            //precacheSiteMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            //precacheSiteMappingExpression.ForMember(d => d.Name, o => o.MapFrom(s => s["Sitename"]));
+            //precacheSiteMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+
+            ////is this needed?
+            //CreateMap<PlatformOverview, PrecacheSite>();
+            //CreateMap<PrecacheSite, PlatformOverview>();
 
 
 
@@ -77,8 +99,8 @@ namespace PrecacheManagerServer.API.Infrastructure
 
 
 
-            CreateMap<PlatformOverview, PlatformOverviewResponseModel>();
-            CreateMap<PlatformOverviewResponseModel, PlatformOverview>();
+            //CreateMap<PlatformOverview, PlatformOverviewResponseModel>();
+            //CreateMap<PlatformOverviewResponseModel, PlatformOverview>();
 
 
 

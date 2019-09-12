@@ -31,15 +31,21 @@ namespace PrecacheManagerServer.API.Controllers
         public async Task<IEnumerable<PrecacheSearchResponseModel>> Get()
         {
 
-            var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+            var result = new List<PrecacheSearchResponseModel>();
+            
 
-            foreach(var key in _platformSettings.ConnectionStrings.Keys)
+            foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
-                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+                var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+                platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+
+                var r = await _service.GetAsync(platformSettingsRequestModel);
+
+                result.AddRange(r.ToList().Take(3));
             }
 
-            
-            return await _service.GetAsync(platformSettingsRequestModel);
+            return result;
         }
 
         [HttpGet("{id}")]
@@ -55,5 +61,6 @@ namespace PrecacheManagerServer.API.Controllers
 
             return await _service.GetById(platformSettingsRequestModel, id);
         }
+
     }
 }

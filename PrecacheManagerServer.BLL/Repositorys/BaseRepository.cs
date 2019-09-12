@@ -35,7 +35,8 @@ namespace PrecacheManagerServer.BLL.Repositorys
             //return await QueryHandlers.ExecuteQueryGetResult<T>(sql, _dbContext.SqlConnection, _mapper);
 
 
-            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            //var conn = new SqlConnection(request.ConnectionStrings[0]);
+            var conn = new SqlConnection(request.Connections[request.Connections.Keys.First()]);
             //return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
             return await _dbContext.ExecuteQueryGetResult<T>(request.Sql, conn);
 
