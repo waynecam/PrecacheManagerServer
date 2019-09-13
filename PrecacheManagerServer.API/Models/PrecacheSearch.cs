@@ -2,5 +2,6 @@
 {
     public class PrecacheSearch
     {
+        public int id { get; set; }
     }
 }

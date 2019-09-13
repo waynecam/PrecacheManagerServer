@@ -24,9 +24,19 @@ namespace PrecacheManagerServer.Controllers
         private ConcurrentBag<PlatformOverview> PlatformOverViewCollection = new ConcurrentBag<PlatformOverview>()
         {
             new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.International,
-                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){ ID=20, ApplicationMode=Enums.ApplicationMode.International, Name="International Clientsite 1" }} },
+                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){
+                    ID =20, ApplicationMode=Enums.ApplicationMode.International,
+                    Name ="International Clientsite 1",
+                    PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
+                } } },
+
+
             new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.GermanyMedia,
-                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){ ID=21, ApplicationMode=Enums.ApplicationMode.GermanyMedia,Name="Germany ClientSite 1" }} }
+                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite()
+                { ID=21, ApplicationMode=Enums.ApplicationMode.GermanyMedia,
+                    Name ="Germany ClientSite 1",
+                    PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
+                } } }
         };
 
 
@@ -41,7 +51,7 @@ namespace PrecacheManagerServer.Controllers
         //[HttpGet]
         //public IEnumerable<PlatformOverview> GetPlatformOverviews()
         //{
-        //    //return PlatformOverViewCollection;
+        //    return PlatformOverViewCollection;
         //}
 
         [HttpGet]
@@ -50,7 +60,7 @@ namespace PrecacheManagerServer.Controllers
             var result = new List<PlatformOverviewResponseModel>();
 
 
-            
+
 
             //foreach (var key in _platformSettings.ConnectionStrings.Keys)
             //{
@@ -63,7 +73,7 @@ namespace PrecacheManagerServer.Controllers
 
                 platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
 
-                var  r = await _service.GetAsync(platformSettingsRequestModel);
+                var r = await _service.GetAsync(platformSettingsRequestModel);
 
 
 
@@ -71,7 +81,7 @@ namespace PrecacheManagerServer.Controllers
             }
 
             return result;
-        
+
         }
     }
 }
