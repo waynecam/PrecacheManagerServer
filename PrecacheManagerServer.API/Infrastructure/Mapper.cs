@@ -23,12 +23,19 @@ namespace PrecacheManagerServer.API.Infrastructure
             CreateMap<PlatformSettings, PlatformSettingsRequestModel>();
             //BLL > DAL
             CreateMap<PlatformSettingsRequestModel, PlatformSettingsModel>();
+
+
+            //API > BLL
+            CreateMap<PrecacheSearchItemsCreated, PrecacheSearchItemsCreatedResponseModel>();
+            //BLL > DAL
+            CreateMap<PrecacheSearchItemsCreatedResponseModel, PrecacheSearchItemsCreated>();
+
             //CreateMap<IDataReader, PrecacheSearch>();
             //CreateMap<PrecacheSearch, IDataReader>();
 
             DtToPrecacheSearchMapper();
             DtToPlatformOverviewMapper();
-
+            DtToPrecacheSearchItemCreatedMapper();
 
 
             ////https://stackoverflow.com/questions/18432173/auto-mapper-mapping-of-nested-object-within-a-collection
@@ -120,5 +127,28 @@ namespace PrecacheManagerServer.API.Infrastructure
             precacheSearchMappingExpression.ForMember(d => d.AreaSearchName, o => o.MapFrom(s => s["AreaSearchName"]));
             precacheSearchMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
         }
+
+
+        private void DtToPrecacheSearchItemCreatedMapper()
+        {
+            //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
+            IMappingExpression<DataRow, PrecacheSearchItemsCreated> precacheSearchMappingExpression = CreateMap<DataRow, PrecacheSearchItemsCreated>();
+            precacheSearchMappingExpression.ForMember(d => d.ID, o => o.MapFrom(s => s["Id"]));
+            precacheSearchMappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
+            precacheSearchMappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"]));
+            precacheSearchMappingExpression.ForMember(d => d.DashBoardSearchType, o => o.MapFrom(s => s["DashboardSearchType"]));
+            precacheSearchMappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
+            precacheSearchMappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
+            precacheSearchMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            precacheSearchMappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
+            precacheSearchMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            precacheSearchMappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
+            precacheSearchMappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
+            precacheSearchMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
+
+            precacheSearchMappingExpression.ForMember(d => d.IsDuplicate, o => o.MapFrom(s => s["IsDuplicate"]));
+            precacheSearchMappingExpression.ForMember(d => d.HomepageSearchId, o => o.MapFrom(s => s["HomepageSearchId"]));
+        }
     }
 }
+ 
