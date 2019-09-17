@@ -143,7 +143,7 @@ namespace PrecacheManagerServer.API.Infrastructure
             precacheSearchMappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
             precacheSearchMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
             precacheSearchMappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
-            precacheSearchMappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"]));
+            precacheSearchMappingExpression.ForMember(d => d.DynamicPrecacheSearchId, o => o.MapFrom(s => s["DynamicPrecacheSearchId"] == DBNull.Value ? -1 : s["DynamicPrecacheSearchId"]));
             precacheSearchMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
 
             precacheSearchMappingExpression.ForMember(d => d.IsDuplicate, o => o.MapFrom(s => s["IsDuplicate"]));

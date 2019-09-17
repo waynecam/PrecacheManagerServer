@@ -30,7 +30,6 @@ namespace PrecacheManagerServer.BLL.Services
                 "		[ID]" +
                 "      ,[CreatedDate]" +
                 "      ,[LastUpdateDate]" +
-                "      ,[Filter]" +
                 "      ,[DashBoardSearchType]" +
                 "      ,[SearchId]" +
                 "      ,[SearchVersion]" +

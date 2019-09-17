@@ -12,8 +12,6 @@ namespace PrecacheManagerServer.DAL.Models
 
         public DateTime? LastUpdateDate { get; set; }
 
-        public Object Filter { get; set; }
-
         public int DashBoardSearchType { get; set; }
 
         public int SearchId { get; set; }
