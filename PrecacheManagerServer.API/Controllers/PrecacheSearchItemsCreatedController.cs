@@ -80,7 +80,7 @@ namespace PrecacheManagerServer.API.Controllers
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 
-                    result.AddRange(r.ToList().Take(10));
+                    result.AddRange(r.ToList());
                     //result.AddRange(r.ToList());
                 }
             }

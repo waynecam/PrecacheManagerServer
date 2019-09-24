@@ -30,12 +30,19 @@ namespace PrecacheManagerServer.API.Infrastructure
             //BLL > DAL
             CreateMap<PrecacheSearchItemsCreatedResponseModel, PrecacheSearchItemsCreated>();
 
+
+            //API > BLL
+            CreateMap<LoggedPrecacheSearchItem, LoggedPrecacheSearchItemResponseModel>();
+            //BLL > DAL
+            CreateMap<LoggedPrecacheSearchItemResponseModel, LoggedPrecacheSearchItem>();
+
             //CreateMap<IDataReader, PrecacheSearch>();
             //CreateMap<PrecacheSearch, IDataReader>();
 
             DtToPrecacheSearchMapper();
             DtToPlatformOverviewMapper();
             DtToPrecacheSearchItemCreatedMapper();
+            DtToLoggedPrecacheSearchItemMapper();
 
 
             ////https://stackoverflow.com/questions/18432173/auto-mapper-mapping-of-nested-object-within-a-collection
@@ -148,6 +155,26 @@ namespace PrecacheManagerServer.API.Infrastructure
 
             precacheSearchMappingExpression.ForMember(d => d.IsDuplicate, o => o.MapFrom(s => s["IsDuplicate"]));
             precacheSearchMappingExpression.ForMember(d => d.HomepageSearchId, o => o.MapFrom(s => s["HomepageSearchId"]));
+        }
+
+
+        private void DtToLoggedPrecacheSearchItemMapper()
+        {
+            //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
+            IMappingExpression<DataRow, LoggedPrecacheSearchItem> LoggedPrecacheSearchItemMappingExpression = CreateMap<DataRow, LoggedPrecacheSearchItem>();
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.ID, o => o.MapFrom(s => s["Id"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.LastUpdateDate, o => o.MapFrom(s => s["LastUpdateDate"] == DBNull.Value ? null : s["LastUpdateDate"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.SearchId, o => o.MapFrom(s => s["SearchId"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.SearchVersion, o => o.MapFrom(s => s["SearchVersion"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.ApplicationMode, o => o.MapFrom(s => s["ApplicationMode"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.AreaNo, o => o.MapFrom(s => s["AreaNo"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.SiteId, o => o.MapFrom(s => s["SiteId"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.HomePageSearchType, o => o.MapFrom(s => s["HomePageSearchType"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.HomepageSearchId, o => o.MapFrom(s => s["HomepageSearchId"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.ErrorMessage, o => o.MapFrom(s => s["ErrorMessage"]));
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.DashBoardSearchTypeEnum, o => o.MapFrom(s => s["DashBoardSearchTypeEnum"]));
+
         }
     }
 }

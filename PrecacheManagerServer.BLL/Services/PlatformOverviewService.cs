@@ -30,7 +30,7 @@ namespace PrecacheManagerServer.BLL.Services
             var arg = _mapper.Map<PlatformSettingsModel>(request);
 
             //replace this with a more complex where query
-            var sql = "SELECT  TOP 5 psi.[ID]" +
+            var sql = "SELECT top 500 psi.[ID]" +
                 "      ,[Data]" +
                 "      ,[Data_Length]" +
                 "      ,[CreatedDate]" +
@@ -70,7 +70,7 @@ namespace PrecacheManagerServer.BLL.Services
             var precacheSites = new List<PrecacheSite>();
 
             //now get all the distinct siteids and the associated
-            var siteGrpBy = result.GroupBy(x => new { x.SiteId, x.Name }).Select(y => y.Key);
+            var siteGrpBy = result.GroupBy(x => new { x.SiteId, x.Name, x.ApplicationMode }).Select(y => y.Key);
 
          
             //noew build the precachesites and the related precachesearches
@@ -82,6 +82,7 @@ namespace PrecacheManagerServer.BLL.Services
 
                 precachesite.SiteId = key.SiteId;
                 precachesite.Name = key.Name;
+                precachesite.ApplicationMode = key.ApplicationMode;
        
                 precacheSearches = result.Where(x => x.SiteId == key.SiteId).Select(x => new PrecacheSearch()
                 {
@@ -107,6 +108,12 @@ namespace PrecacheManagerServer.BLL.Services
 
                 platformOverviewRM.PrecacheSites.Add(precachesite);
             }
+
+            //// now fetch the precachesearchitems that should have been created
+            //sql = "SELECT COUNT(*) FROM " +
+            //"[" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "] psic" +
+            //"WHERE psic.applicationMode = " + (int)request.Connections.Keys.First() +
+            //"AND psic.IsDuplicate = 0";
 
 
             var finalResult = new List<PlatformOverviewResponseModel>();
