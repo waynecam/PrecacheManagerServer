@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
 
@@ -42,7 +43,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[AreaNo]" +
                 "      ,[ErrorMessage]" +
                 "         FROM[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetTableName() + "]" +
-                "  WHERE applicationMode = " + (int)request.Connections.Keys.First() + "";
+                "  WHERE applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
 
             arg.Sql = sql;
 

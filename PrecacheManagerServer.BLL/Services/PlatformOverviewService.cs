@@ -6,8 +6,8 @@ using PrecacheManagerServer.DAL.Models;
 using System.Linq;
 using PrecacheManagerServer.BLL.Models;
 using System.Threading.Tasks;
+using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.BLL.Enums;
-using PrecacheManagerServer.DAL.Enums;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -54,7 +54,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "  FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "] psi"
                  + " JOIN  " +
                  "[" + PrecacheDbTable.Clientsite.GetSchemaName() + "].[" + PrecacheDbTable.Clientsite.GetTableName() + "] cs ON SiteID = cs.ID" +
-                "  WHERE psi.applicationMode = " + (int)request.Connections.Keys.First() + " and psi.IsDeleted = 0";
+                "  WHERE psi.applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + " and psi.IsDeleted = 0";
 
             arg.Sql = sql;
 

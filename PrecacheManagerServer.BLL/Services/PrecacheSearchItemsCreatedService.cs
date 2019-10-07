@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
 
@@ -43,7 +44,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[PrecacheIntegrityKey]" +
                 "      ,[IsDuplicate]" +
                 "  FROM [" + PrecacheDbTable.PrecacheSearchItemsCreated.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItemsCreated.GetTableName() + "] " +
-                "  WHERE ApplicationMode = '" + (int)request.Connections.Keys.First() + "'";
+                "  WHERE ApplicationMode = '" + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "'";
             arg.Sql = sql;
 
 

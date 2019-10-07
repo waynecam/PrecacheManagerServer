@@ -9,6 +9,7 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Models;
+using PrecacheManagerServer.BLL.Enums;
 
 namespace PrecacheManagerServer.Controllers
 {
@@ -23,17 +24,17 @@ namespace PrecacheManagerServer.Controllers
 
         private ConcurrentBag<PlatformOverview> PlatformOverViewCollection = new ConcurrentBag<PlatformOverview>()
         {
-            new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.International,
+            new PlatformOverview(){ApplicationMode = ApplicationMode.International,
                 PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){
-                    ID =20, ApplicationMode=Enums.ApplicationMode.International,
+                    ID =20, ApplicationMode=ApplicationMode.International,
                     Name ="International Clientsite 1",
                     PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
                 } } },
 
 
-            new PlatformOverview(){ApplicationMode = Enums.ApplicationMode.GermanyMedia,
+            new PlatformOverview(){ApplicationMode = ApplicationMode.GermanyMedia,
                 PrecacheSites = new List<PrecacheSite>(){new PrecacheSite()
-                { ID=21, ApplicationMode=Enums.ApplicationMode.GermanyMedia,
+                { ID=21, ApplicationMode=ApplicationMode.GermanyMedia,
                     Name ="Germany ClientSite 1",
                     PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
                 } } }

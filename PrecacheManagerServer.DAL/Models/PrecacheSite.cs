@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PrecacheManagerServer.DAL.Enums;
-using PrecacheManagerServer.Enums;
 
 namespace PrecacheManagerServer.DAL.Models
 {

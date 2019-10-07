@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PrecacheManagerServer.Enums;
+using PrecacheManagerServer.BLL.Enums;
 
 namespace PrecacheManagerServer.Models
 {

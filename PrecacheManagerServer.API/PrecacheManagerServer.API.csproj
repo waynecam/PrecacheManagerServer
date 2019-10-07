@@ -25,4 +25,8 @@
     <ProjectReference Include="..\PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\Extensions\" />
+  </ItemGroup>
+
 </Project>

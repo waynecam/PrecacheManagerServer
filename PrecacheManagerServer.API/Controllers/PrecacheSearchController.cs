@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
-using PrecacheManagerServer.Enums;
+using PrecacheManagerServer.BLL.Enums.Extensions;
 
 namespace PrecacheManagerServer.API.Controllers
 {
@@ -72,7 +72,7 @@ namespace PrecacheManagerServer.API.Controllers
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
 
-                if ((int)key == applicationMode)
+                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
@@ -98,7 +98,7 @@ namespace PrecacheManagerServer.API.Controllers
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
 
-                if ((int)key == applicationMode)
+                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 

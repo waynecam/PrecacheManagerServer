@@ -7,9 +7,13 @@ namespace PrecacheManagerServer.DAL.Enums
 {
     public enum ApplicationMode
     {
+        
         Australia = 0,
+        
         Germany = 1,
+        
         International = 2,
+       
         GermanyMedia = 4,
        
     }
