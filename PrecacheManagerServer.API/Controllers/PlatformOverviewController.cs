@@ -77,7 +77,7 @@ namespace PrecacheManagerServer.Controllers
 
 
 
-                result.AddRange(r.ToList().Take(500));
+                result.AddRange(r.ToList());
             }
 
             return result;

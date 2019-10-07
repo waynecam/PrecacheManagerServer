@@ -88,5 +88,31 @@ namespace PrecacheManagerServer.API.Controllers
             return result;
         }
 
+        [HttpGet]
+        [Route("[action]/{applicationMode}/{siteId}")]
+        public async Task<IEnumerable<PrecacheSearchResponseModel>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
+        {
+            var result = new List<PrecacheSearchResponseModel>();
+
+
+            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            {
+
+                if ((int)key == applicationMode)
+                {
+                    var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+
+                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+
+                    var r = await _service.GetAsync(platformSettingsRequestModel);
+
+                    result.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+                    //result.AddRange(r.ToList());
+                }
+            }
+
+            return result;
+        }
+
     }
 }
