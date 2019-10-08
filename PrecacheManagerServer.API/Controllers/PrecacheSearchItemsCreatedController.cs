@@ -8,6 +8,7 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.BLL.Models;
 using System.ComponentModel.DataAnnotations;
+using PrecacheManagerServer.BLL.Enums.Extensions;
 
 namespace PrecacheManagerServer.API.Controllers
 {
@@ -42,7 +43,7 @@ namespace PrecacheManagerServer.API.Controllers
 
                 var r = await _service.GetAsync(platformSettingsRequestModel);
 
-                result.AddRange(r.ToList().Take(3));
+                result.AddRange(r.ToList());
             }
 
             return result;
@@ -72,7 +73,7 @@ namespace PrecacheManagerServer.API.Controllers
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
 
-                if ((int)key == applicationMode)
+                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
