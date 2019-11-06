@@ -28,6 +28,7 @@ namespace PrecacheManagerServer.BLL.Services
             
 
             var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var appMode = request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
 
             //replace this with a more complex where query
             var sql = "SELECT top 500 psi.[ID]" +
@@ -54,7 +55,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "  FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "] psi"
                  + " JOIN  " +
                  "[" + PrecacheDbTable.Clientsite.GetSchemaName() + "].[" + PrecacheDbTable.Clientsite.GetTableName() + "] cs ON SiteID = cs.ID" +
-                "  WHERE psi.applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + " and psi.IsDeleted = 0";
+                "  WHERE psi.applicationMode = " + appMode + " and psi.IsDeleted = 0";
 
             arg.Sql = sql;
 

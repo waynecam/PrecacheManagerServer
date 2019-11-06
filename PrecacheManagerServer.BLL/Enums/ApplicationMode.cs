@@ -12,7 +12,7 @@ namespace PrecacheManagerServer.BLL.Enums
         Australia = 0,
         [ApplicationModeId(1)]
         Germany = 1,
-        [ApplicationModeId(2)]
+        [ApplicationModeId(4)]
         GermanyMedia = 2,
         [ApplicationModeId(2)]
         International = 3
