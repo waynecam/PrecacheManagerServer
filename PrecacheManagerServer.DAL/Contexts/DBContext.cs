@@ -80,6 +80,18 @@ namespace PrecacheManagerServer.DAL.Contexts
 
         }
 
+        public async Task AddOrUpdate(string sql, List<SqlParameter> parameters, SqlConnection conn)
+        {
+            await Task.Run(() =>
+            {
+                using (var command = new SqlCommand(sql, conn))
+                {
+                    command.Parameters.AddRange(parameters.ToArray());
+                    command.ExecuteNonQuery();
+                }
+            });
+        }
+
 
 
         //public static List<T> DtToObjectMapper<T>(DataTable dt, IMapper mapper)

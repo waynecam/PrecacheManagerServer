@@ -65,6 +65,11 @@ namespace PrecacheManagerServer.BLL.Repositorys
             return result.FirstOrDefault();
         }
 
+        public async Task AddOrUpdate(PlatformSettingsModel request)
+        {
+
+        }
+
         public async Task<IEnumerable<T>> Where(PlatformSettingsModel request, string sql)
         {
             //Table mapping logic
