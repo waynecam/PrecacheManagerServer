@@ -24,6 +24,13 @@ namespace PrecacheManagerServer.API.Infrastructure
             //BLL > DAL
             CreateMap<PlatformSettingsRequestModel, PlatformSettingsModel>();
 
+            //API > BLL
+            CreateMap(typeof(PlatformSettingRequestsModelAddOrUpdate<>), typeof(PlatformSettingsModelAddOrUpdate<>));
+            //BLL > DAL
+            CreateMap(typeof(PlatformSettingsModelAddOrUpdate<>), typeof(PlatformSettingRequestsModelAddOrUpdate<>));
+
+            //var config = new MapperConfiguration(cfg =>
+            //    cfg.CreateMap(typeof(PlatformSettingRequestsModelAddOrUpdate<>), typeof(PlatformSettingsModelAddOrUpdate<>)));
 
             //API > BLL
             CreateMap<PrecacheSearchItemsCreated, PrecacheSearchItemsCreatedResponseModel>();

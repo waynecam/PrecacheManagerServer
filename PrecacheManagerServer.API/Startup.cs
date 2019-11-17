@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PrecacheManagerServer.API.Infrastructure;
 using AutoMapper;
+//using PrecacheManagerServer.BLL.Models;
+//using PrecacheManagerServer.DAL.Models;
 
 namespace PrecacheManagerServer
 {
@@ -46,6 +48,8 @@ namespace PrecacheManagerServer
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
+                //mc.CreateMap(typeof(PlatformSettingRequestsModelAddOrUpdate<>), typeof(PlatformSettingsModelAddOrUpdate<>));
+                //mc.CreateMap(typeof(PlatformSettingsModelAddOrUpdate<>), typeof(PlatformSettingRequestsModelAddOrUpdate<>));
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
