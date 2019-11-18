@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PrecacheManagerServer.BLL.Models
+namespace PrecacheManagerServer.DAL.Models
 {
-    public  class PrecacheRerun
+    public  class PrecacheRerun :BaseEntity
     {
 
         public int SiteId { get; set; }

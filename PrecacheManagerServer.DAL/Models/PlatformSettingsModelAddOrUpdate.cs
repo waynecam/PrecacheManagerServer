@@ -8,7 +8,7 @@ namespace PrecacheManagerServer.DAL.Models
 {
     public class PlatformSettingsModelAddOrUpdate <T> : BasePlatformSettingsModel, IPlatformSettingsModelAddOrUpdate <T>
     {
-      public List<SqlParameter> SqlParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+      public List<SqlParameter> SqlParameters { get; set; }
 
       public List<T> Data { get; set; }
     }

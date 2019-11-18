@@ -26,6 +26,11 @@ namespace PrecacheManagerServer.BLL.Services
             return await _repository.GetById(request);
         }
 
+        public void AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
+        {
+            //_repository.addOrUpdate()
+        }
+
         
     }
 }
