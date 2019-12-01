@@ -29,6 +29,8 @@ namespace PrecacheManagerServer.BLL.Services
         public void AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
         {
             //_repository.addOrUpdate()
+
+            _repository.AddOrUpdate(request);
         }
 
         

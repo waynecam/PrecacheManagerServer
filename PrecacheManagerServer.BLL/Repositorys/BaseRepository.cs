@@ -65,9 +65,11 @@ namespace PrecacheManagerServer.BLL.Repositorys
             return result.FirstOrDefault();
         }
 
-        public async Task AddOrUpdate(PlatformSettingsModel request)
+        public async void AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
         {
+            var conn = new SqlConnection(request.Connections[request.Connections.Keys.First()]);
 
+            await _dbContext.AddOrUpdate(request.Sql, request.SqlParameters, conn);
         }
 
         public async Task<IEnumerable<T>> Where(PlatformSettingsModel request, string sql)
