@@ -8,6 +8,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace PrecacheManagerServer
 {
@@ -15,7 +16,20 @@ namespace PrecacheManagerServer
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            //CreateWebHostBuilder(args).Build().Run();
+
+            try
+            {
+                CreateWebHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "App crashed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         //public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -24,8 +38,11 @@ namespace PrecacheManagerServer
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
-          .UseKestrel(options => {
+            .CaptureStartupErrors(false)
+          .UseKestrel(options =>
+          {
               options.Listen(IPAddress.Loopback, 6001); //HTTP port
-            }).UseStartup<Startup>();
+          })
+            .UseStartup<Startup>();
     }
 }
