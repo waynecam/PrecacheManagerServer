@@ -29,5 +29,7 @@ namespace PrecacheManagerServer.DAL.Models
         public int AreaNo { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public Guid PrecacheIntegrityKey { get; set; }
     }
 }

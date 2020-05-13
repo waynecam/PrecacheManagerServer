@@ -19,7 +19,10 @@ namespace PrecacheManagerServer.BLL.Enums
         [TableName("DynamicPrecacheSearches")]
         [SchemaName("dbo")]
         DynamicPrecacheSearches,
-        [TableName("LoggedPrecacheSearchItem")]
+        //[TableName("LoggedPrecacheSearchItem")]
+        //[SchemaName("dbo")]
+        //LoggedPrecacheSearchItem,
+        [TableName("PrecacheRerunLoggedPrecacheSearchItem")]
         [SchemaName("dbo")]
         LoggedPrecacheSearchItem,
         [TableName("DashboardPrecache")]

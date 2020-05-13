@@ -181,7 +181,7 @@ namespace PrecacheManagerServer.API.Infrastructure
             LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.HomepageSearchId, o => o.MapFrom(s => s["HomepageSearchId"]));
             LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.ErrorMessage, o => o.MapFrom(s => s["ErrorMessage"]));
             LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.DashBoardSearchTypeEnum, o => o.MapFrom(s => s["DashBoardSearchTypeEnum"]));
-
+            LoggedPrecacheSearchItemMappingExpression.ForMember(d => d.PrecacheIntegrityKey, o => o.MapFrom(s => s["PrecacheIntegrityKey"]));
         }
     }
 }

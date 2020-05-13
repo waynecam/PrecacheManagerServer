@@ -30,7 +30,7 @@ namespace PrecacheManagerServer.BLL.Services
             var arg = _mapper.Map<PlatformSettingsModel>(request);
 
 
-            var sql = "SELECT TOP 1000 [ID]" +
+            var sql = "SELECT [ID]" +
                 "      ,[HomePageSearchType]" +
                 "      ,[HomepageSearchId]" +
                 "      ,[SiteId]" +
@@ -42,6 +42,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[ApplicationMode]" +
                 "      ,[AreaNo]" +
                 "      ,[ErrorMessage]" +
+                "      ,[PrecacheIntegrityKey]" +
                 "         FROM[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetTableName() + "]" +
                 "  WHERE applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
 

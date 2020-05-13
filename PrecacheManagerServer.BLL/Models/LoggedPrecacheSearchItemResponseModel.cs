@@ -29,5 +29,7 @@ namespace PrecacheManagerServer.BLL.Models
         public int AreaNo { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        Guid PrecacheIntegrityKey { get; set; }
     }
 }
