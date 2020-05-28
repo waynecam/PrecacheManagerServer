@@ -30,6 +30,6 @@ namespace PrecacheManagerServer.BLL.Models
 
         public string ErrorMessage { get; set; }
 
-        Guid PrecacheIntegrityKey { get; set; }
+        public Guid PrecacheIntegrityKey { get; set; }
     }
 }

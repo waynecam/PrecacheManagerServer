@@ -98,6 +98,21 @@ namespace PrecacheManagerServer.API.Controllers
                 }
             }
 
+            var testloggedPrecacheSarchItem = new LoggedPrecacheSearchItemResponseModel()
+            {
+                ApplicationMode = 2,
+                HomePageSearchType = 3,
+                PrecacheIntegrityKey = Guid.NewGuid(),
+                ErrorMessage = "This is a test",
+                SearchId = 1,
+                SearchVersion = 2,
+                AreaNo = 5
+
+
+            };
+
+            result.Add(testloggedPrecacheSarchItem);
+
             return result;
         }
 

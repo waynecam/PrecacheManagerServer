@@ -31,7 +31,7 @@ namespace PrecacheManagerServer.BLL.Services
             var appMode = request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
 
             //replace this with a more complex where query
-            var sql = "SELECT top 500 psi.[ID]" +
+            var sql = "SELECT top 50 psi.[ID]" +
                 "      ,[Data]" +
                 "      ,[Data_Length]" +
                 "      ,[CreatedDate]" +

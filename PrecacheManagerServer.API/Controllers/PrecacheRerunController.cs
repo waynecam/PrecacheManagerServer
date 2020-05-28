@@ -24,13 +24,14 @@ namespace PrecacheManagerServer.API.Controllers
         }
 
         [HttpPost]
-        [Route("api/precachererun/{applicationMode}")]
-        public void Post(int applicationMode, [FromBody] PrecacheRerun precacheRerun)
+        [Route("[action]/{applicationMode}")]
+        public void RerunFailedPrecacheSearch(int applicationMode, [FromBody] PrecacheRerun precacheRerun)
         {
             if (!ModelState.IsValid)
             {
                 throw new HttpRequestException();
             }
+
         }
     }
 }
