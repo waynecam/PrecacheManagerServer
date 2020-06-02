@@ -10,5 +10,7 @@ namespace PrecacheManagerServer.BLL.Models
          Dictionary<ApplicationMode, string> Connections { get; set; }
 
         string Sql { get; set; }
+
+        Dictionary<string, string> Where { get; set; }
     }
 }

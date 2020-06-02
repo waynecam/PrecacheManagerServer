@@ -13,5 +13,9 @@ namespace PrecacheManagerServer.DAL.Models
         public int HomepageSearchType { get; set; }
 
         public int SearchId { get; set; }
+
+        public int Applicationmode { get; set; }
+
+        public Guid PrecacheIntegrityKey { get; set; }
     }
 }

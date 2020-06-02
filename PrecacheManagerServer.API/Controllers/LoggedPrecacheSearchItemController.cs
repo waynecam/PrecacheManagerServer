@@ -102,7 +102,7 @@ namespace PrecacheManagerServer.API.Controllers
             {
                 ApplicationMode = 2,
                 HomePageSearchType = 3,
-                PrecacheIntegrityKey = Guid.NewGuid(),
+                PrecacheIntegrityKey = new Guid("745F783D-FCF4-4241-9080-C978FE64B954"),
                 ErrorMessage = "This is a test",
                 SearchId = 1,
                 SearchVersion = 2,

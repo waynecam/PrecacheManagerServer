@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
-    public class PrecacheRerunService
+    public class PrecacheRerunService : IPrecacheRerunService
     {
         private readonly IBaseService<PrecacheRerun> _service;
         private readonly IMapper _mapper;
@@ -20,13 +21,13 @@ namespace PrecacheManagerServer.BLL.Services
             _mapper = mapper;
         }
 
-        public void AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
+        public async Task AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
         {
-
             var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
             var sql = "INSERT INTO PRECACHERERUN (HomepageSearchId, HomepageSearchType, SearchId, CreatedDate, Status) " +
                 "VALUES (@HomepageSearchId, @HomepageSearchType, @SearchId, @CreatedDate, @Status)";
 
+            arg.Sql = sql;
 
             var sqlParamaters = new List<SqlParameter>();
 
@@ -35,7 +36,7 @@ namespace PrecacheManagerServer.BLL.Services
 
             var parameter1 = new SqlParameter("@HomepageSearchId", precacheRerun.HomePageSearchId);
             var parameter2 = new SqlParameter("@HomepageSearchType", precacheRerun.HomepageSearchType);
-            var parameter3  = new SqlParameter("@SearchId", precacheRerun.SearchId);
+            var parameter3 = new SqlParameter("@SearchId", precacheRerun.SearchId);
             var parameter4 = new SqlParameter("@CreatedDate", DateTime.Now);
             var parameter5 = new SqlParameter("@Status", 1);
 
@@ -50,16 +51,23 @@ namespace PrecacheManagerServer.BLL.Services
 
 
 
-
-
-
-
-
-
-            _service.AddOrUpdate(arg);
+           await  _service.AddOrUpdate(arg);
 
 
         }
+        public async Task AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
+        {
+            var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
 
+            //arg.SqlCommandType = System.Data.CommandType.StoredProcedure;
+
+            var precacheRerun = _mapper.Map<PrecacheRerun>(request.Data.FirstOrDefault());
+
+            var sql = "InsertDynamicPrecacheRerunPrecacheSearch";
+
+            arg.Sql = sql;
+
+            await _service.AddOrUpdateSP(arg);
+        }
     }
 }

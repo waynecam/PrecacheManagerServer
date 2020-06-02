@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using PrecacheManagerServer.BLL.Models;
+using System.Threading.Tasks;
 
 namespace PrecacheManagerServer.BLL.Services
 {
     public interface IPrecacheRerunService
     {
-        void AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
+        Task AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
+
+        Task AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
     }
 }

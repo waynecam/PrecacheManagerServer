@@ -13,6 +13,9 @@ namespace PrecacheManagerServer.BLL.Services
 
         Task<T> GetById(PlatformSettingsModel request);
 
-        void AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request);
+        Task AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request);
+
+        Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request);
+
     }
 }

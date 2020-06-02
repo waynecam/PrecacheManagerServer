@@ -11,5 +11,8 @@ namespace PrecacheManagerServer.DAL.Contexts
         Task<List<T>> ExecuteQueryGetResult<T>(string sql, SqlConnection conn);
 
         Task AddOrUpdate(string sql, List<SqlParameter> parameters, SqlConnection conn);
-    }
+
+        Task AddOrUpdateSP(string sql, List<SqlParameter> parameters, SqlConnection conn);
+
+    }   
 }

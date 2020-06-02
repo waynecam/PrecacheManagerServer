@@ -9,7 +9,7 @@ using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.DAL.Contexts;
 using PrecacheManagerServer.DAL.Mappers;
 using PrecacheManagerServer.DAL.Models;
-
+using PrecacheRerun = PrecacheManagerServer.DAL.Models.PrecacheRerun;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
@@ -18,6 +18,7 @@ namespace PrecacheManagerServer.API.Infrastructure
         public static void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<DataContext>();
+
 
             services.AddTransient<IBaseRepository<PrecacheSearch>,BaseRepository<PrecacheSearch>>();
             services.AddTransient<IBaseService<PrecacheSearch>,BaseService<PrecacheSearch>>();
@@ -38,6 +39,14 @@ namespace PrecacheManagerServer.API.Infrastructure
             services.AddTransient<IPlatformSettings, PlatformSettings>();
             services.AddTransient<IDataMapper, DataMapper>();
             services.AddTransient<IDBContext, DBContext>();
+
+
+            services.AddTransient<IBaseRepository<PrecacheRerun>, BaseRepository<PrecacheRerun>>();
+            services.AddTransient<IBaseService<PrecacheRerun>, BaseService<PrecacheRerun>>();
+            services.AddTransient<IPrecacheRerunService, PrecacheRerunService>();
+
+            
+
             //services.AddTransient<IErrorHandler, ErrorHandler>();
         }
     }

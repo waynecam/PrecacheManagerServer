@@ -13,12 +13,15 @@ namespace PrecacheManagerServer.BLL.Models
 
         public string Sql { get; set; }
 
+        public Dictionary<string, string> Where { get; set; }
+
         public BasePlatformSettingsRequestModel()
         {
             //read these from the config goign forward
 
             ConnectionStrings = new List<string>();
             Connections = new Dictionary<ApplicationMode, string>();
+            Where = new Dictionary<string, string>();
             //var conn = $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;";
             //ConnectionStrings = new List<string>() { conn };
         }

@@ -8,6 +8,8 @@ using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.API.Models;
 using System.Data;
 using PrecacheManagerServer.DAL.Enums;
+using PrecacheRerunApi = PrecacheManagerServer.API.Models.PrecacheRerun;
+using PrecacheRerunDal= PrecacheManagerServer.DAL.Models.PrecacheRerun;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
@@ -42,6 +44,13 @@ namespace PrecacheManagerServer.API.Infrastructure
             CreateMap<LoggedPrecacheSearchItem, LoggedPrecacheSearchItemResponseModel>();
             //BLL > DAL
             CreateMap<LoggedPrecacheSearchItemResponseModel, LoggedPrecacheSearchItem>();
+
+            //API > BLL
+            CreateMap<PrecacheRerunApi, PrecacheRerunDal>();
+            //BLL > DAL
+            CreateMap<PrecacheRerunDal, PrecacheRerunApi>();
+
+
 
             //CreateMap<IDataReader, PrecacheSearch>();
             //CreateMap<PrecacheSearch, IDataReader>();
