@@ -67,6 +67,10 @@ namespace PrecacheManagerServer.BLL.Services
 
             arg.Sql = sql;
 
+            var paramater1 = new SqlParameter("@precacheIntegrityKey", precacheRerun.PrecacheIntegrityKey);
+
+            arg.SqlParameters.Add(paramater1);
+
             await _service.AddOrUpdateSP(arg);
         }
     }

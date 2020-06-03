@@ -97,11 +97,14 @@ namespace PrecacheManagerServer.DAL.Contexts
             {
                 await Task.Run(() =>
                 {
-                    //using (var command = new SqlCommand(sql, conn))
-                    //{
-                    //    command.Parameters.AddRange(parameters.ToArray());
-                    //    command.ExecuteNonQuery();
-                    //}
+                    using (var command = new SqlCommand(sql, conn))
+                    {
+                        conn.Open();
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = sql;
+                        command.Parameters.AddRange(parameters.ToArray());
+                        command.ExecuteNonQuery();
+                    }
 
                     return true;
                 });
