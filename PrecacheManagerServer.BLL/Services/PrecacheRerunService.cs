@@ -63,7 +63,7 @@ namespace PrecacheManagerServer.BLL.Services
 
             var precacheRerun = _mapper.Map<PrecacheRerun>(request.Data.FirstOrDefault());
 
-            var sql = "InsertDynamicPrecacheRerunPrecacheSearch";
+            var sql = "pc_InsertDynamicPrecacheRerunPrecacheSearch";
 
             arg.Sql = sql;
 

@@ -103,8 +103,11 @@ namespace PrecacheManagerServer.DAL.Contexts
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = sql;
                         command.Parameters.AddRange(parameters.ToArray());
-                        command.ExecuteNonQuery();
+                        var result = command.ExecuteNonQuery();
+
                     }
+
+
 
                     return true;
                 });
