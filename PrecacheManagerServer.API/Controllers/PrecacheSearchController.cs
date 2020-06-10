@@ -10,6 +10,7 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.BLL.Enums.Extensions;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.API.Controllers
 {
@@ -30,9 +31,7 @@ namespace PrecacheManagerServer.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<PrecacheSearchResponseModel>> Get()
         {
-
             var result = new List<PrecacheSearchResponseModel>();
-            
 
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
@@ -44,7 +43,7 @@ namespace PrecacheManagerServer.API.Controllers
 
                 result.AddRange(r.ToList().Take(3));
             }
-
+            
             return result;
         }
 
@@ -90,9 +89,10 @@ namespace PrecacheManagerServer.API.Controllers
 
         [HttpGet]
         [Route("[action]/{applicationMode}/{siteId}")]
-        public async Task<IEnumerable<PrecacheSearchResponseModel>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
+        //public async Task<IEnumerable<PrecacheSearchResponseModel>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
+        public async Task<IResultMessage<IEnumerable<PrecacheSearchResponseModel>>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
         {
-            var result = new List<PrecacheSearchResponseModel>();
+            var data = new List<PrecacheSearchResponseModel>();
 
 
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
@@ -106,10 +106,18 @@ namespace PrecacheManagerServer.API.Controllers
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 
-                    result.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+                    data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
                     //result.AddRange(r.ToList());
                 }
             }
+
+            //return data;
+
+            var result = new ResultMessage<IEnumerable<PrecacheSearchResponseModel>>()
+            {
+                Data = data,
+                Success = true
+            };
 
             return result;
         }

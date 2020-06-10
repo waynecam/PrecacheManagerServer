@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
+    <ProjectReference Include="..\PrecacheManagerServer.Shared\PrecacheManagerServer.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
