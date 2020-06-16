@@ -8,6 +8,7 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.BLL.Enums.Extensions;
+using PrecacheManagerServer.Shared.Models;
 
 
 namespace PrecacheManagerServer.API.Controllers
@@ -51,26 +52,47 @@ namespace PrecacheManagerServer.API.Controllers
 
         [HttpGet]
         [Route("[action]/{applicationMode}")]
-        public async Task<IEnumerable<LoggedPrecacheSearchItemResponseModel>> GetByApplicationMode(int applicationMode)
+        public async Task<IResultMessage<IEnumerable<LoggedPrecacheSearchItemResponseModel>>> GetByApplicationMode(int applicationMode)
         {
-            var result = new List<LoggedPrecacheSearchItemResponseModel>();
+            var data = new List<LoggedPrecacheSearchItemResponseModel>();
 
-
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            var result = new ResultMessage<IEnumerable<LoggedPrecacheSearchItemResponseModel>>()
+            {
+                Success = true
+            };
+            try
             {
 
-                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                foreach (var key in _platformSettings.ConnectionStrings.Keys)
                 {
-                    var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                    {
+                        var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    var r = await _service.GetAsync(platformSettingsRequestModel);
+                        platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
 
-                    result.AddRange(r.ToList());
-                    //result.AddRange(r.ToList());
+                        var r = await _service.GetAsync(platformSettingsRequestModel);
+
+                        data.AddRange(r.ToList());
+                        //result.AddRange(r.ToList());
+                    }
                 }
+
+                result.Data = data;
+                result.Success = true;
+
+            }catch(Exception ex)
+            {
+                result.Success = false;
+                result.FriendlyErrorMessage = "Failed to fetch Failed Precache Searches";
+                result.Error = ex;
             }
+
+
+
+
+           
 
             return result;
         }
@@ -102,7 +124,7 @@ namespace PrecacheManagerServer.API.Controllers
             {
                 ApplicationMode = 2,
                 HomePageSearchType = 3,
-                PrecacheIntegrityKey = new Guid("745F783D-FCF4-4241-9080-C978FE64B954"),
+                PrecacheIntegrityKey = new Guid("1D798C43-89B2-4A32-B302-97F4AA1940DD"),
                 ErrorMessage = "This is a test",
                 SearchId = 1,
                 SearchVersion = 2,

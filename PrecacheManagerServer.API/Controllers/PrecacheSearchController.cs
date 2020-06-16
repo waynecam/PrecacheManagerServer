@@ -93,31 +93,41 @@ namespace PrecacheManagerServer.API.Controllers
         public async Task<IResultMessage<IEnumerable<PrecacheSearchResponseModel>>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
         {
             var data = new List<PrecacheSearchResponseModel>();
+            var result = new ResultMessage<IEnumerable<PrecacheSearchResponseModel>>()
+            {
+                Success = true
+            };
 
-
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            try
             {
 
-                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                foreach (var key in _platformSettings.ConnectionStrings.Keys)
                 {
-                    var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                    {
+                        var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    var r = await _service.GetAsync(platformSettingsRequestModel);
+                        platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
 
-                    data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
-                    //result.AddRange(r.ToList());
+                        var r = await _service.GetAsync(platformSettingsRequestModel);
+
+                        data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+                        //result.AddRange(r.ToList());
+                    }
                 }
+                result.Success = true;
+                result.Data = data;
+
+            }
+            catch(Exception ex)
+            {
+                result.Success = false;
+                result.FriendlyErrorMessage = "Failed to fetch Precache Searches";
+                result.Error = ex;
             }
 
             //return data;
-
-            var result = new ResultMessage<IEnumerable<PrecacheSearchResponseModel>>()
-            {
-                Data = data,
-                Success = true
-            };
 
             return result;
         }

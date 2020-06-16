@@ -10,6 +10,7 @@ using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Models;
 using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.Controllers
 {
@@ -56,10 +57,16 @@ namespace PrecacheManagerServer.Controllers
         //}
 
         [HttpGet]
-        public async Task<IEnumerable<PlatformOverviewResponseModel>> GetPlatformOverviews()
+        //public async Task<IEnumerable<PlatformOverviewResponseModel>> GetPlatformOverviews()
+        public async Task<IResultMessage<IEnumerable<PlatformOverviewResponseModel>>> GetPlatformOverviews()
         {
-            var result = new List<PlatformOverviewResponseModel>();
+            //var result = new List<PlatformOverviewResponseModel>();
+            var data = new List<PlatformOverviewResponseModel>();
 
+            var result = new ResultMessage<IEnumerable<PlatformOverviewResponseModel>>()
+            {
+                Success = true
+            };
 
 
 
@@ -68,18 +75,27 @@ namespace PrecacheManagerServer.Controllers
             //    platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
             //}
 
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            try
             {
-                var platformSettingsRequestModel = new PlatformSettingsRequestModel();
+                foreach (var key in _platformSettings.ConnectionStrings.Keys)
+                {
+                    var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
 
-                var r = await _service.GetAsync(platformSettingsRequestModel);
+                    var r = await _service.GetAsync(platformSettingsRequestModel);
 
+                    data.AddRange(r.ToList());
+                }
 
-
-                result.AddRange(r.ToList());
+                result.Data = data;
+            }catch (Exception ex)
+            {
+                result.Success = false;
+                result.Error = ex;
+                result.FriendlyErrorMessage = "Couldnt get platform Overviews at this time";
             }
+
 
             return result;
 
