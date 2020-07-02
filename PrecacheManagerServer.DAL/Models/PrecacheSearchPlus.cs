@@ -5,7 +5,10 @@ using PrecacheManagerServer.DAL.Enums;
 
 namespace PrecacheManagerServer.DAL.Models
 {
-    public class PlatformOverview :BaseEntity
+    /// <summary>
+    /// Precachesserach details plus additional applicationmode and sitelevel meta detail
+    /// </summary>
+    public class PrecacheSearchPlus :BaseEntity
     {
             public ApplicationMode ApplicationMode { get; set; }
 

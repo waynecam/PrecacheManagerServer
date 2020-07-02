@@ -111,7 +111,7 @@ namespace PrecacheManagerServer.API.Infrastructure
         private void DtToPlatformOverviewMapper()
         {
             //https://stackoverflow.com/questions/35414228/using-automapper-to-map-a-datatable-to-an-object-dto
-            IMappingExpression<DataRow, PlatformOverview> platformOverviewMappingExpression = CreateMap<DataRow, PlatformOverview>();
+            IMappingExpression<DataRow, PrecacheSearchPlus> platformOverviewMappingExpression = CreateMap<DataRow, PrecacheSearchPlus>();
             platformOverviewMappingExpression.ForMember(d => d.Name, o => o.MapFrom(s => s["Sitename"]));
             platformOverviewMappingExpression.ForMember(d => d.Id, o => o.MapFrom(s => s["Id"]));
             platformOverviewMappingExpression.ForMember(d => d.CreatedDate, o => o.MapFrom(s => s["CreatedDate"]));

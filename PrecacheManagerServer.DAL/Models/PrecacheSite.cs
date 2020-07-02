@@ -12,6 +12,8 @@ namespace PrecacheManagerServer.DAL.Models
         public PrecacheSite()
         {
             PrecacheSearches = new List<PrecacheSearch>();
+            LoggedPrecacheSearchItems = new List<LoggedPrecacheSearchItem>();
+            PrecacheSearchItemsCreated = new List<PrecacheSearchItemsCreated>();
         }
 
         public int SiteId { get; set; }
@@ -19,7 +21,14 @@ namespace PrecacheManagerServer.DAL.Models
         public string Name { get; set; }
 
         public List<PrecacheSearch> PrecacheSearches { get; set; }
+        public List<LoggedPrecacheSearchItem> LoggedPrecacheSearchItems { get; set; }
 
-       public ApplicationMode ApplicationMode { get; set; }
+        public List<PrecacheSearchItemsCreated> PrecacheSearchItemsCreated { get; set; }
+
+        public ApplicationMode ApplicationMode { get; set; }
+
+
+
+
     }
 }
