@@ -22,7 +22,7 @@ namespace PrecacheManagerServer.BLL.Enums
         //[TableName("LoggedPrecacheSearchItem")]
         //[SchemaName("dbo")]
         //LoggedPrecacheSearchItem,
-        [TableName("PrecacheRerunLoggedPrecacheSearchItem")]
+        [TableName("Precacher_LoggedPrecacheSearchItem")]
         [SchemaName("dbo")]
         LoggedPrecacheSearchItem,
         [TableName("DashboardPrecache")]

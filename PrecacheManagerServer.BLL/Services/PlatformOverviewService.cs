@@ -170,11 +170,11 @@ namespace PrecacheManagerServer.BLL.Services
         {
             //replace this with a more complex where query
             var sql = "SELECT psi.[ID]" +
-                "      ,[Data]" +
+             
                 "      ,[Data_Length]" +
                 "      ,[CreatedDate]" +
                 "      ,[LastUpdateDate]" +
-                "      ,[Filter]" +
+             
                 "      ,[DashBoardSearchType]" +
                 "      ,[SearchId]" +
                 "      ,[SearchVersion]" +
