@@ -110,9 +110,13 @@ namespace PrecacheManagerServer.API.Controllers
 
                         platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
 
+
+                        platformSettingsRequestModel.Where.Add("siteid", siteId.ToString());
+
                         var r = await _service.GetAsync(platformSettingsRequestModel);
 
-                        data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+                         //data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+                        data.AddRange(r.ToList());
                         //result.AddRange(r.ToList());
                     }
                 }

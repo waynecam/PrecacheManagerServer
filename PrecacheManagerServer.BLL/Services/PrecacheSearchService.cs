@@ -29,7 +29,37 @@ namespace PrecacheManagerServer.BLL.Services
             
             var arg = _mapper.Map<PlatformSettingsModel>(request);
 
-            var sql = "SELECT * FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() +"].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "]";
+            
+
+            var sql = "SELECT [ID]" +
+                "      ,[Data_Length]" +
+                "      ,[CreatedDate]" +
+                "      ,[LastUpdateDate]" +
+
+                "      ,[DashBoardSearchType]" +
+                "      ,[SearchId]" +
+                "      ,[SearchVersion]" +
+                "      ,[HomepageSearchId]" +
+                "      ,[ApplicationMode]" +
+                "      ,[PrecacheKey]" +
+                "      ,[AreaNo]" +
+                "      ,[SiteId]" +
+                "      ,[HomePageSearchType]" +
+                "      ,[DynamicPrecacheSearchId]" +
+                "      ,[AreaSearchName]" +
+                "      ,[PrecacheIntegrityKey]" +
+                "       ,[IsDeleted]" +
+                " FROM [" + PrecacheDbTable.PrecacheSearchItem.GetSchemaName() +"].[" + PrecacheDbTable.PrecacheSearchItem.GetTableName() + "]";
+
+            if (arg.Where.Any())
+            {
+                sql = sql + " WHERE ";
+                foreach(var dicItem in arg.Where)
+                {
+                    sql += dicItem.Key + " = " + dicItem.Value;
+                }
+            }
+
 
             arg.Sql = sql;
 
