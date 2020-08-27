@@ -12,6 +12,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PrecacheManagerServer.API.Infrastructure;
 using AutoMapper;
+using PrecacheManagerServer.API.Models;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using PrecacheManagerServer.API.Services;
 //using PrecacheManagerServer.BLL.Models;
 //using PrecacheManagerServer.DAL.Models;
 
@@ -58,6 +63,34 @@ namespace PrecacheManagerServer
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
 
+            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
+            var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
+            var secret = Encoding.ASCII.GetBytes(token.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(token.Secret)),
+                    ValidIssuer = token.Issuer,
+                    ValidAudience = token.Audience,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
+            services.AddScoped<ITokenAuthenticateService, TokenAuthenticationService>();
+
+            services.AddScoped<IUserManagementService, UserManagementService>();
+
             Installer.ConfigureServices(services);
         }
 
@@ -87,7 +120,7 @@ namespace PrecacheManagerServer
             );
 
 
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
