@@ -10,6 +10,7 @@ using System.Data;
 using PrecacheManagerServer.DAL.Enums;
 using PrecacheRerunApi = PrecacheManagerServer.API.Models.PrecacheRerun;
 using PrecacheRerunDal= PrecacheManagerServer.DAL.Models.PrecacheRerun;
+using User = PrecacheManagerServer.DAL.Models.User;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
@@ -49,6 +50,12 @@ namespace PrecacheManagerServer.API.Infrastructure
             CreateMap<PrecacheRerunApi, PrecacheRerunDal>();
             //BLL > DAL
             CreateMap<PrecacheRerunDal, PrecacheRerunApi>();
+
+
+            //API > BLL
+            CreateMap<User, UserResponseModel>();
+            //BLL > DAL
+            CreateMap<UserResponseModel, User>();
 
 
 

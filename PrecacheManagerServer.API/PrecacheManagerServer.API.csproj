@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.2.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.7.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Serilog" Version="2.9.0" />
@@ -28,6 +29,10 @@
   <ItemGroup>
     <ProjectReference Include="..\PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
     <ProjectReference Include="..\PrecacheManagerServer.Shared\PrecacheManagerServer.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="development.pfx" />
   </ItemGroup>
 
   <ItemGroup>

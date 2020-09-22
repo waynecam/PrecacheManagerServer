@@ -44,8 +44,8 @@ namespace PrecacheManagerServer.API.Infrastructure
             services.AddTransient<IBaseRepository<PrecacheRerun>, BaseRepository<PrecacheRerun>>();
             services.AddTransient<IBaseService<PrecacheRerun>, BaseService<PrecacheRerun>>();
             services.AddTransient<IPrecacheRerunService, PrecacheRerunService>();
+            services.AddTransient<IMembershipService, MemberShipService>();
 
-            
 
             //services.AddTransient<IErrorHandler, ErrorHandler>();
         }

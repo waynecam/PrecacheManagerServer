@@ -73,11 +73,14 @@ namespace PrecacheManagerServer
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
+                //this parts handles the validation of incomign jwts from incomign requests
+                //https://developer.okta.com/blog/2018/03/23/token-authentication-aspnetcore-complete-guide
+                //https://www.google.com/search?safe=strict&rlz=1C1GCEA_enGB883GB883&q=asp.net+core+2.2+jwt+authentication&sa=X&ved=2ahUKEwjAk7Pr9vDrAhWmaRUIHRbGARAQ1QIoAnoECA4QAw&biw=1920&bih=953#kpvalbx=_ULtjX-79L_aChbIP-qSrgA426
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
+                    ValidateIssuerSigningKey = true,//va;idates the token with the jwt secret
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(token.Secret)),
                     ValidIssuer = token.Issuer,
                     ValidAudience = token.Audience,
@@ -120,7 +123,7 @@ namespace PrecacheManagerServer
             );
 
 
-            app.UseAuthentication();
+            app.UseAuthentication();//adds the authenticatrion middleware
             app.UseHttpsRedirection();
             app.UseMvc();
         }
