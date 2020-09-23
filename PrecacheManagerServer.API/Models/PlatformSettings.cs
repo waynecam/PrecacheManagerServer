@@ -22,7 +22,7 @@ namespace PrecacheManagerServer.API.Models
 
             //ConnectionStrings.Add(ApplicationMode.GermanyMedia, $"Connection Timeout=300;Data Source=DUBWINSQLP001\\PORTFOLIOGER;initial catalog=PortfolioManagementGER;persist security info=True;Integrated Security=True;");
             //ConnectionStrings.Add(ApplicationMode.Australia, $"Connection Timeout=300;Data Source=SYDWINSQLP001;Initial Catalog=PortfolioManagementAUS;persist security info=True;user id=LinkedServerUser;password=7XvAAkG82b6vDECypojf;");
-            //ConnectionStrings.Add(ApplicationMode.International, $"Connection Timeout=300;Data Source=10.236.234.20\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;");
+            ConnectionStrings.Add(ApplicationMode.International, $"Connection Timeout=300;Data Source=10.236.234.20\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;");
             ConnectionStrings.Add(ApplicationMode.GermanyMedia, $"Connection Timeout=300;Data Source=10.236.234.20\\PORTFOLIOGER;initial catalog=PortfolioManagementGER;persist security info=True;Integrated Security=True;");
 
 

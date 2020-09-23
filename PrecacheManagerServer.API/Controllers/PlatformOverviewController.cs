@@ -11,12 +11,18 @@ using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Models;
 using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.Shared.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PrecacheManagerServer.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
-    public class PlatformOverviewController : ControllerBase
+    [Authorize]
+    public class PlatformOverviewController : UserController
     {
 
         IPlatformOverviewService _service;
@@ -42,7 +48,8 @@ namespace PrecacheManagerServer.Controllers
         };
 
 
-        public PlatformOverviewController(IPlatformOverviewService service, IPlatformSettings platformSetting)
+        public PlatformOverviewController(IServiceProvider serviceProvider,IPlatformOverviewService service, IPlatformSettings platformSetting) :
+            base(serviceProvider)
         {
             _service = service;
             _platformSettings = platformSetting;
@@ -60,7 +67,7 @@ namespace PrecacheManagerServer.Controllers
         //public async Task<IEnumerable<PlatformOverviewResponseModel>> GetPlatformOverviews()
         public async Task<IResultMessage<IEnumerable<PlatformOverviewResponseModel>>> GetPlatformOverviews()
         {
-            //var result = new List<PlatformOverviewResponseModel>();
+
             var data = new List<PlatformOverviewResponseModel>();
 
             var result = new ResultMessage<IEnumerable<PlatformOverviewResponseModel>>()
@@ -77,8 +84,9 @@ namespace PrecacheManagerServer.Controllers
 
             try
             {
-                foreach (var key in _platformSettings.ConnectionStrings.Keys)
-                {
+                //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+                foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
+                    {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
                     platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);

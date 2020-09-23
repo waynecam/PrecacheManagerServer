@@ -17,7 +17,7 @@ namespace PrecacheManagerServer.BLL.Services
 
             //return result.Select(t => _mapper.Map<User, UserResponseModel>(t));
             return new UserResponseModel() { UserName = "wayne.campbell", Password = "testpassword" ,
-                ApplicationModes = new List<ApplicationMode> { ApplicationMode.GermanyMedia} };
+                ApplicationModes = new List<ApplicationMode> { ApplicationMode.GermanyMedia, ApplicationMode.International} };
         }
 
 

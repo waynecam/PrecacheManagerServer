@@ -1,4 +1,4 @@
-﻿using PrecacheManagerServer.Enums;
+﻿using PrecacheManagerServer.BLL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,8 @@ namespace PrecacheManagerServer.API.Models
         public string UserName { get; set; }
         public string Password { get; set; }
 
-        public List<ApplicationMode> ApplicationModes { get; set; }
+        public IEnumerable<ApplicationMode> ApplicationModes { get; set; }
+
+        public IPlatformSettings PlatformSettings { get; set; }
     }
 }
