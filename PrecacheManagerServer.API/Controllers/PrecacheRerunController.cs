@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
-using PrecacheManagerServer.BLL.Enums.Extensions;
+//using PrecacheManagerServer.BLL.Enums.Extensions;
+using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 

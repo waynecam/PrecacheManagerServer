@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
-using PrecacheManagerServer.BLL.Enums.Extensions;
+//using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.Shared.Models;
+using PrecacheManagerServer.Shared.Enums.Extensions;
 
 
 namespace PrecacheManagerServer.API.Controllers

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using PrecacheManagerServer.BLL.Enums;
-using PrecacheManagerServer.BLL.Enums.Extensions;
+//using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
+using PrecacheManagerServer.Shared.Enums;
+using PrecacheManagerServer.Shared.Enums.Extensions;
 
 namespace PrecacheManagerServer.BLL.Services
 {

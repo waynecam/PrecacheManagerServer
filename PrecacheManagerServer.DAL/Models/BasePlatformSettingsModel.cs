@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PrecacheManagerServer.DAL.Enums;
-
+//using PrecacheManagerServer.DAL.Enums;
+using PrecacheManagerServer.Shared.Enums;
 namespace PrecacheManagerServer.DAL.Models
 {
     public abstract class BasePlatformSettingsModel : IBasePlatformSettingsModel

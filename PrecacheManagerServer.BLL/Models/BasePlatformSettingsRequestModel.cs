@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.BLL.Models
 {

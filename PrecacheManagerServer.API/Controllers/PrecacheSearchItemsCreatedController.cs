@@ -8,7 +8,8 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.BLL.Models;
 using System.ComponentModel.DataAnnotations;
-using PrecacheManagerServer.BLL.Enums.Extensions;
+//using PrecacheManagerServer.BLL.Enums.Extensions;
+using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.API.Controllers

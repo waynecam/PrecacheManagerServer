@@ -6,8 +6,11 @@ using PrecacheManagerServer.DAL.Models;
 using System.Linq;
 using PrecacheManagerServer.BLL.Models;
 using System.Threading.Tasks;
-using PrecacheManagerServer.BLL.Enums.Extensions;
-using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.BLL.Enums.Extensions;
+//using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Enums.Extensions;
+using PrecacheManagerServer.Shared.Enums;
+
 
 namespace PrecacheManagerServer.BLL.Services
 {

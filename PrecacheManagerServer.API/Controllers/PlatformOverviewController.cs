@@ -9,12 +9,13 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Models;
-using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.Shared.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.Controllers
 {

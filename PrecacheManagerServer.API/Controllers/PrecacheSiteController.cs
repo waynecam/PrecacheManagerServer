@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 //using PrecacheManagerServer.Enums;
 using PrecacheManagerServer.Models;
-using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.Controllers
 {

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
-using PrecacheManagerServer.BLL.Enums;
-using PrecacheManagerServer.Enums;
-using ApplicationMode = PrecacheManagerServer.BLL.Enums.ApplicationMode;
+//using PrecacheManagerServer.BLL.Enums;
+//using PrecacheManagerServer.Enums;
+//using ApplicationMode = PrecacheManagerServer.BLL.Enums.ApplicationMode;
+using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.Controllers
 {
