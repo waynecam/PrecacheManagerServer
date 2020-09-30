@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
-using PrecacheManagerServer.Models;
 //using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.Shared.Models;
 using Microsoft.AspNetCore.Authentication;
