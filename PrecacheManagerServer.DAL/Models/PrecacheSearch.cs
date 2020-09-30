@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PrecacheManagerServer.DAL.Models
 {
-   public class PrecacheSearch : BaseEntity
+   public class PrecacheSearch : BaseEntity, IPrecacheSearch
     {
         private int _id;
         public int Id { get => _id; set => _id = value; }
