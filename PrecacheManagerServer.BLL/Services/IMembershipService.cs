@@ -1,4 +1,5 @@
-﻿using PrecacheManagerServer.BLL.Enums;
+﻿//using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Enums;
 using PrecacheManagerServer.BLL.Models;
 using System;
 using System.Collections.Generic;

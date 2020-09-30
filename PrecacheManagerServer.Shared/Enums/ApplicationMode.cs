@@ -8,13 +8,14 @@ namespace PrecacheManagerServer.Shared.Enums
 {
     public enum ApplicationMode
     {
-        [ApplicationModeId(2)]
+        [ApplicationModeId(2), ApplicationModeFriendlyDescription("Australia")]
         Australia = 0,
-        [ApplicationModeId(1)]
-        Germany = 1,
-        [ApplicationModeId(4)]
-        GermanyMedia = 2,
-        [ApplicationModeId(2)]
-        International = 3
+        //[ApplicationModeId(4), ApplicationModeFriendlyDescription("Germany")]
+        //GermanyMedia = 2,
+        [ApplicationModeId(2), ApplicationModeFriendlyDescription("International")]
+        International = 2,
+
+        [ApplicationModeId(4), ApplicationModeFriendlyDescription("Germany")]
+        GermanyMedia = 4,
     }
 }
