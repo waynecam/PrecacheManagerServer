@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace PrecacheManagerServer.DAL.Enums
+namespace PrecacheManagerServer.Shared.Enums
 {
     public enum DashBoardSearchTypeEnum
     {
