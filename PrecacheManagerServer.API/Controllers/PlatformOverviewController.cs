@@ -30,23 +30,7 @@ namespace PrecacheManagerServer.Controllers
         IPlatformSettings _platformSettings;
 
 
-        private ConcurrentBag<PlatformOverview> PlatformOverViewCollection = new ConcurrentBag<PlatformOverview>()
-        {
-            new PlatformOverview(){ApplicationMode = ApplicationMode.International,
-                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite(){
-                    ID =20, ApplicationMode=ApplicationMode.International,
-                    Name ="International Clientsite 1",
-                    PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
-                } } },
-
-
-            new PlatformOverview(){ApplicationMode = ApplicationMode.GermanyMedia,
-                PrecacheSites = new List<PrecacheSite>(){new PrecacheSite()
-                { ID=21, ApplicationMode=ApplicationMode.GermanyMedia,
-                    Name ="Germany ClientSite 1",
-                    PrecacheSearches = new List<PrecacheSearch>(){ new PrecacheSearch() { id =10} }
-                } } }
-        };
+     
 
 
         public PlatformOverviewController(IServiceProvider serviceProvider,IPlatformOverviewService service, IPlatformSettings platformSetting) :

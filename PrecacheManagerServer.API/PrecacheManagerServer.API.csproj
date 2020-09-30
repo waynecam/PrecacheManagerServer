@@ -13,6 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Enums\Extensions\**" />
+    <Content Remove="Enums\Extensions\**" />
+    <EmbeddedResource Remove="Enums\Extensions\**" />
+    <None Remove="Enums\Extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -33,10 +40,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="development.pfx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enums\Extensions\" />
   </ItemGroup>
 
 </Project>
