@@ -8,7 +8,7 @@ namespace PrecacheManagerServer.DAL.Models
 {
     public interface IBasePlatformSettingsModel 
     {
-        List<string> ConnectionStrings { get; set; }
+        //List<string> ConnectionStrings { get; set; }
         Dictionary<ApplicationMode, string> Connections { get; set; }
 
         Dictionary<string, string> Where { get; set; }

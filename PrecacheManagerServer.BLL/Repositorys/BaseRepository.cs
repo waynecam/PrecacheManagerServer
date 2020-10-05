@@ -58,7 +58,8 @@ namespace PrecacheManagerServer.BLL.Repositorys
 
 
 
-            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            //var conn = new SqlConnection(request.ConnectionStrings[0]);
+            var conn = new SqlConnection(request.Connections[request.Connections.Keys.First()]);
             //return await DBContext.ExecuteQueryGetResult<T>(sql, conn, _mapper);
 
             var result = await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
@@ -83,7 +84,9 @@ namespace PrecacheManagerServer.BLL.Repositorys
         {
             //Table mapping logic
             //precachesearch => precachesearchItem Table then (using automapper) back again
-            var conn = new SqlConnection(request.ConnectionStrings[0]);
+            //var conn = new SqlConnection(request.ConnectionStrings[0]);
+            var conn = new SqlConnection(request.Connections[request.Connections.Keys.First()]);
+
             return await _dbContext.ExecuteQueryGetResult<T>(sql, conn);
         }
     }
