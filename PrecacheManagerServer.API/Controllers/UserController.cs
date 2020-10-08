@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrecacheManagerServer.API.Models;
+using PrecacheManagerServer.API.Services;
 //using PrecacheManagerServer.BLL.Enums;
 //using PrecacheManagerServer.Enums;
 //using ApplicationMode = PrecacheManagerServer.BLL.Enums.ApplicationMode;
 using PrecacheManagerServer.Shared.Enums;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.Controllers
 {
@@ -19,11 +21,14 @@ namespace PrecacheManagerServer.Controllers
     {
 
         IPlatformSettings _platformSettings;
+        IPlatformConfigService _platformConfigService; 
 
         public UserController(IServiceProvider serviceProvider)
         {
             //https://stackoverflow.com/questions/21916020/base-controller-constructor-injection-in-asp-net-mvc-with-unity
             _platformSettings = (PlatformSettings)serviceProvider.GetService(typeof(IPlatformSettings));
+
+            _platformConfigService = (PlatformConfigService)serviceProvider.GetService(typeof(IPlatformConfigService));
         }
 
 
@@ -77,11 +82,13 @@ namespace PrecacheManagerServer.Controllers
         private IPlatformSettings GetPlatformSettings(IEnumerable<ApplicationMode> appModes, IPlatformSettings platformSettings)
         {
             IPlatformSettings userPlatformSettings = new PlatformSettings();
-            userPlatformSettings.ConnectionStrings.Clear();
+            //userPlatformSettings.ConnectionStrings.Clear();
+           
 
             foreach (var appMode in appModes)
             {
-                foreach(var connection in platformSettings.ConnectionStrings)
+                //foreach(var connection in platformSettings.ConnectionStrings)
+                foreach(var connection in _platformConfigService.ConnectionStrings)
                 {
                     if(connection.Key == appMode)
                     {

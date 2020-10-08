@@ -10,6 +10,7 @@ using PrecacheManagerServer.API.Models;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.BLL.Services;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.API.Controllers
 {

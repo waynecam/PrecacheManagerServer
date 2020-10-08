@@ -29,6 +29,7 @@ namespace PrecacheManagerServer.Controllers
         IPlatformSettings _platformSettings;
 
 
+
      
 
 
@@ -73,7 +74,8 @@ namespace PrecacheManagerServer.Controllers
                     {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    //platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 

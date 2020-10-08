@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PrecacheManagerServer.Shared.Enums;
+using PrecacheManagerServer.Shared.Models;
+
 
 namespace PrecacheManagerServer.API.Models
 {

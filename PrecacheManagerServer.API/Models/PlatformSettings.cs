@@ -7,14 +7,14 @@ using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.API.Models
 {
-    public class PlatformSettings : IPlatformSettings
+    public class PlatformSettings_old : IPlatformSettings_old
     {
 
         public Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
 
 
 
-        public PlatformSettings()
+        public PlatformSettings_old()
         {
             ConnectionStrings = new Dictionary<ApplicationMode, string>();
             //ConnectionStrings.Add(ApplicationMode.International, $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;");

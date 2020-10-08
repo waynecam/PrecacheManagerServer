@@ -94,6 +94,8 @@ namespace PrecacheManagerServer
 
             services.AddScoped<IUserManagementService, UserManagementService>();
 
+            services.AddScoped<IPlatformConfigService, PlatformConfigService>();
+
             Installer.ConfigureServices(services);
         }
 

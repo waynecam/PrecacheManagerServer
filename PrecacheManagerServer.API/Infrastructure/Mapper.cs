@@ -11,6 +11,7 @@ using PrecacheManagerServer.DAL.Enums;
 using PrecacheRerunApi = PrecacheManagerServer.API.Models.PrecacheRerun;
 using PrecacheRerunDal= PrecacheManagerServer.DAL.Models.PrecacheRerun;
 using User = PrecacheManagerServer.DAL.Models.User;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {

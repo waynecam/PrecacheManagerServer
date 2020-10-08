@@ -7,7 +7,7 @@ using PrecacheManagerServer.Shared.Enums;
 
 namespace PrecacheManagerServer.API.Models
 {
-    public interface IPlatformSettings
+    public interface IPlatformSettings_old
     {
         Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
     }

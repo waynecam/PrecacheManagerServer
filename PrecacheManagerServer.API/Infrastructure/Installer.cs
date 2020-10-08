@@ -10,6 +10,7 @@ using PrecacheManagerServer.DAL.Contexts;
 using PrecacheManagerServer.DAL.Mappers;
 using PrecacheManagerServer.DAL.Models;
 using PrecacheRerun = PrecacheManagerServer.DAL.Models.PrecacheRerun;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.API.Infrastructure
 {
