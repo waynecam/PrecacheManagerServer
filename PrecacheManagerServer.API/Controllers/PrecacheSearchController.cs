@@ -13,16 +13,16 @@ using PrecacheManagerServer.BLL.Services;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.Shared.Models;
 
-namespace PrecacheManagerServer.API.Controllers
+namespace PrecacheManagerServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrecacheSearchController : ControllerBase
+    public class PrecacheSearchController : UserController
     {
         IPrecacheSearchService _service;
         IPlatformSettings _platformSettings;
         
-        public PrecacheSearchController(IPrecacheSearchService service, IPlatformSettings platformSettings)
+        public PrecacheSearchController(IServiceProvider serviceProvider, IPrecacheSearchService service, IPlatformSettings platformSettings) : base(serviceProvider)
         {
             _service = service;
             _platformSettings = platformSettings;
@@ -34,11 +34,12 @@ namespace PrecacheManagerServer.API.Controllers
         {
             var result = new List<PrecacheSearchResponseModel>();
 
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
-            {
+            //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
+                {
                 var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                 var r = await _service.GetAsync(platformSettingsRequestModel);
 
@@ -54,9 +55,10 @@ namespace PrecacheManagerServer.API.Controllers
 
             var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
-            {
-                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+            //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
+                {
+                platformSettingsRequestModel.ConnectionStrings.Add(CurrentUser.PlatformSettings.ConnectionStrings[key]);
             }
 
             return await _service.GetById(platformSettingsRequestModel, id);
@@ -69,14 +71,15 @@ namespace PrecacheManagerServer.API.Controllers
             var result = new List<PrecacheSearchResponseModel>();
 
 
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
             {
 
                 if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 
@@ -102,14 +105,15 @@ namespace PrecacheManagerServer.API.Controllers
             try
             {
 
-                foreach (var key in _platformSettings.ConnectionStrings.Keys)
-                {
+                //foreach (var key in _platformSettings.ConnectionStrings.Keys)
+                foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
+                    {
 
                     if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
                     {
                         var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                        platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                        platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
 
                         platformSettingsRequestModel.Where.Add("siteid", siteId.ToString());
