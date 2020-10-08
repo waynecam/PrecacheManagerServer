@@ -9,8 +9,8 @@ namespace PrecacheManagerServer.BLL.Models
    public abstract class BasePlatformSettingsRequestModel : IBasePlatformSettingsRequestModel
     {
 
-        public List<string> ConnectionStrings { get; set; }
-        public Dictionary<ApplicationMode, string> Connections { get; set; }
+        public List<string> Connections { get; set; }
+        public Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
 
         public string Sql { get; set; }
 
@@ -20,8 +20,8 @@ namespace PrecacheManagerServer.BLL.Models
         {
             //read these from the config goign forward
 
-            ConnectionStrings = new List<string>();
-            Connections = new Dictionary<ApplicationMode, string>();
+            Connections = new List<string>();
+            ConnectionStrings = new Dictionary<ApplicationMode, string>();
             Where = new Dictionary<string, string>();
             //var conn = $"Connection Timeout=300;Data Source=GBR-C-SQL-001J\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;";
             //ConnectionStrings = new List<string>() { conn };

@@ -7,8 +7,8 @@ namespace PrecacheManagerServer.BLL.Models
     interface IBasePlatformSettingsRequestModel
     {
 
-         List<string> ConnectionStrings { get; set; }
-         Dictionary<ApplicationMode, string> Connections { get; set; }
+         List<string> Connections { get; set; }
+         Dictionary<ApplicationMode, string> ConnectionStrings { get; set; }
 
         string Sql { get; set; }
 

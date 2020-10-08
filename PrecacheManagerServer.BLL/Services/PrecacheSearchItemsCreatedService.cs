@@ -10,6 +10,7 @@ using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.BLL.Enums.Extensions;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -26,7 +27,8 @@ namespace PrecacheManagerServer.BLL.Services
 
         public async Task<IEnumerable<PrecacheSearchItemsCreatedResponseModel>> GetAsync(PlatformSettingsRequestModel request)
         {
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
 
             //replace this with a more complex where query
             var sql = "SELECT " +
@@ -46,7 +48,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[PrecacheIntegrityKey]" +
                 "      ,[IsDuplicate]" +
                 "  FROM [" + PrecacheDbTable.PrecacheSearchItemsCreated.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItemsCreated.GetTableName() + "] " +
-                "  WHERE ApplicationMode = '" + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "'";
+                "  WHERE ApplicationMode = '" + (int)request.ConnectionStrings.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "'";
             arg.Sql = sql;
 
 
@@ -58,7 +60,8 @@ namespace PrecacheManagerServer.BLL.Services
         }
        public async Task<PrecacheSearchItemsCreatedResponseModel> GetById(PlatformSettingsRequestModel request, int id)
         {
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
             arg.Where.Add("id", id.ToString());
 
             return _mapper.Map<PrecacheSearchItemsCreated, PrecacheSearchItemsCreatedResponseModel>(await _service.GetById(arg));

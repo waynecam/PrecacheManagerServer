@@ -39,7 +39,7 @@ namespace PrecacheManagerServer.Controllers
                 {
                 var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
+                platformSettingsRequestModel.ConnectionStrings.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                 var r = await _service.GetAsync(platformSettingsRequestModel);
 
@@ -58,7 +58,7 @@ namespace PrecacheManagerServer.Controllers
             //foreach (var key in _platformSettings.ConnectionStrings.Keys)
             foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
                 {
-                platformSettingsRequestModel.ConnectionStrings.Add(CurrentUser.PlatformSettings.ConnectionStrings[key]);
+                platformSettingsRequestModel.Connections.Add(CurrentUser.PlatformSettings.ConnectionStrings[key]);
             }
 
             return await _service.GetById(platformSettingsRequestModel, id);
@@ -79,7 +79,7 @@ namespace PrecacheManagerServer.Controllers
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
+                    platformSettingsRequestModel.ConnectionStrings.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 
@@ -113,7 +113,7 @@ namespace PrecacheManagerServer.Controllers
                     {
                         var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                        platformSettingsRequestModel.Connections.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
+                        platformSettingsRequestModel.ConnectionStrings.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
 
                         platformSettingsRequestModel.Where.Add("siteid", siteId.ToString());

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -23,7 +24,8 @@ namespace PrecacheManagerServer.BLL.Services
 
         public async Task AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
         {
-            var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
+            //var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
+            var arg = _mapper.Map<PlatformSettingsQueryAddUpdate<T>>(request);
             var sql = "INSERT INTO PRECACHERERUN (HomepageSearchId, HomepageSearchType, SearchId, CreatedDate, Status) " +
                 "VALUES (@HomepageSearchId, @HomepageSearchType, @SearchId, @CreatedDate, @Status)";
 
@@ -57,7 +59,8 @@ namespace PrecacheManagerServer.BLL.Services
         }
         public async Task AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
         {
-            var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
+            //var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
+            var arg = _mapper.Map<PlatformSettingsQueryAddUpdate<T>>(request);
 
             //arg.SqlCommandType = System.Data.CommandType.StoredProcedure;
 

@@ -8,6 +8,7 @@ using System.Linq;
 using PrecacheManagerServer.DAL.Models;
 //using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.BLL.Enums;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -28,9 +29,10 @@ namespace PrecacheManagerServer.BLL.Services
         {
 
             
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
 
-            
+
 
             var sql = "SELECT [ID]" +
                 "      ,[Data_Length]" +
@@ -78,7 +80,8 @@ namespace PrecacheManagerServer.BLL.Services
 
             //need to get the id column for the type in question
 
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
             arg.Where.Add("id", id.ToString());
 
             var sql = "SELECT * FROM [" + PrecacheDbTable.Clientsite.GetSchemaName() + "].[" + PrecacheDbTable.Clientsite.GetTableName() + "]";

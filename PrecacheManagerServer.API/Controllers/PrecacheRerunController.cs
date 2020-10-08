@@ -45,7 +45,7 @@ namespace PrecacheManagerServer.API.Controllers
                 {
                     var platformSettingRequestsModelAddOrUpdate = new PlatformSettingRequestsModelAddOrUpdate<PrecacheRerun>();
 
-                    platformSettingRequestsModelAddOrUpdate.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                    platformSettingRequestsModelAddOrUpdate.ConnectionStrings.Add(key, _platformSettings.ConnectionStrings[key]);
 
                     platformSettingRequestsModelAddOrUpdate.Data.Add(precacheRerun);
 

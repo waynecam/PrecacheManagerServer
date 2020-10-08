@@ -10,6 +10,7 @@ using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.Shared.Enums;
 using PrecacheManagerServer.Shared.Enums.Extensions;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -29,7 +30,9 @@ namespace PrecacheManagerServer.BLL.Services
         {
 
 
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
+
 
 
             var sql = "SELECT [ID]" +
@@ -46,7 +49,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[ErrorMessage]" +
                 "      ,[PrecacheIntegrityKey]" +
                 "         FROM[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetTableName() + "]" +
-                "  WHERE applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
+                "  WHERE applicationMode = " + (int)request.ConnectionStrings.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
 
             arg.Sql = sql;
 
@@ -61,7 +64,8 @@ namespace PrecacheManagerServer.BLL.Services
 
        public async Task<LoggedPrecacheSearchItemResponseModel> GetById(PlatformSettingsRequestModel request, int id)
         {
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
             arg.Where.Add("id", id.ToString());
 
             var sql = "SELECT * FROM [" + PrecacheDbTable.LoggedPrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetTableName() + "]";

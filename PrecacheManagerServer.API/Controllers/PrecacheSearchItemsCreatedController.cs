@@ -41,7 +41,7 @@ namespace PrecacheManagerServer.API.Controllers
             {
                 var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                platformSettingsRequestModel.ConnectionStrings.Add(key, _platformSettings.ConnectionStrings[key]);
 
                 var r = await _service.GetAsync(platformSettingsRequestModel);
 
@@ -59,7 +59,7 @@ namespace PrecacheManagerServer.API.Controllers
 
             foreach (var key in _platformSettings.ConnectionStrings.Keys)
             {
-                platformSettingsRequestModel.ConnectionStrings.Add(_platformSettings.ConnectionStrings[key]);
+                platformSettingsRequestModel.Connections.Add(_platformSettings.ConnectionStrings[key]);
             }
 
             return await _service.GetById(platformSettingsRequestModel, id);
@@ -84,7 +84,7 @@ namespace PrecacheManagerServer.API.Controllers
                     {
                         var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                        platformSettingsRequestModel.Connections.Add(key, _platformSettings.ConnectionStrings[key]);
+                        platformSettingsRequestModel.ConnectionStrings.Add(key, _platformSettings.ConnectionStrings[key]);
 
                         var r = await _service.GetAsync(platformSettingsRequestModel);
 

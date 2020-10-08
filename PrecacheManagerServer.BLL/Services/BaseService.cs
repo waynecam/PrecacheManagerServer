@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.BLL.Repositorys;
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -16,17 +17,20 @@ namespace PrecacheManagerServer.BLL.Services
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<T>> GetAsync(PlatformSettingsModel request)
+        //public async Task<IEnumerable<T>> GetAsync(PlatformSettingsModel request)
+        public async Task<IEnumerable<T>> GetAsync(PlatformSettingsQuery request)
         {
             return await _repository.GetAll(request);
         }
 
-        public async Task<T> GetById(PlatformSettingsModel request)
+        //public async Task<T> GetById(PlatformSettingsModel request)
+        public async Task<T> GetById(PlatformSettingsQuery request)
         {
             return await _repository.GetById(request);
         }
 
-        public async Task AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
+        //public async Task AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
+        public async Task AddOrUpdate<TData>(PlatformSettingsQueryAddUpdate<TData> request)
         {
             //_repository.addOrUpdate()
 
@@ -34,7 +38,8 @@ namespace PrecacheManagerServer.BLL.Services
         }
 
 
-        public async Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
+        //public async Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
+        public async Task AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request)
         {
             //_repository.addOrUpdate()
 

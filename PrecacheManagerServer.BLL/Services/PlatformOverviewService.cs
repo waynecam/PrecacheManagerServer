@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 //using PrecacheManagerServer.BLL.Enums;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.Shared.Enums;
-
+using PrecacheManagerServer.Shared.Models;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -32,8 +32,9 @@ namespace PrecacheManagerServer.BLL.Services
 
         public async Task<IEnumerable<PlatformOverviewResponseModel>> GetAsync(PlatformSettingsRequestModel request)
         {
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
-            var appMode = request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg =  _mapper.Map<PlatformSettingsQuery>(request);
+            var appMode = request.ConnectionStrings.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
             //get the precachesearch(plus) items
             IEnumerable<PrecacheSearchPlus> precacheSearchsQuery = await GetPrecacheSearchPlusItems(arg, appMode);
 
@@ -113,7 +114,8 @@ namespace PrecacheManagerServer.BLL.Services
             return platformOverviewRM;
         }
 
-        private async Task<IEnumerable<PrecacheSearchItemsCreated>> GetPrecacheSearchItemsCreatedItems(PlatformSettingsRequestModel request, PlatformSettingsModel arg)
+        //private async Task<IEnumerable<PrecacheSearchItemsCreated>> GetPrecacheSearchItemsCreatedItems(PlatformSettingsRequestModel request, PlatformSettingsModel arg)
+        private async Task<IEnumerable<PrecacheSearchItemsCreated>> GetPrecacheSearchItemsCreatedItems(PlatformSettingsRequestModel request, PlatformSettingsQuery arg)
         {
             var sql = "SELECT " +
                             "		[ID]" +
@@ -132,7 +134,7 @@ namespace PrecacheManagerServer.BLL.Services
                             "      ,[PrecacheIntegrityKey]" +
                             "      ,[IsDuplicate]" +
                             "  FROM [" + PrecacheDbTable.PrecacheSearchItemsCreated.GetSchemaName() + "].[" + PrecacheDbTable.PrecacheSearchItemsCreated.GetTableName() + "] " +
-                            "  WHERE ApplicationMode = '" + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "'";
+                            "  WHERE ApplicationMode = '" + (int)request.ConnectionStrings.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "'";
             arg.Sql = sql;
 
 
@@ -142,7 +144,8 @@ namespace PrecacheManagerServer.BLL.Services
             return preceacheSeacrehItemsCreatedQuery;
         }
 
-        private async Task<IEnumerable<LoggedPrecacheSearchItem>> GetLoggedPrecacheSearchItems(PlatformSettingsRequestModel request, PlatformSettingsModel arg)
+       //private async Task<IEnumerable<LoggedPrecacheSearchItem>> GetLoggedPrecacheSearchItems(PlatformSettingsRequestModel request, PlatformSettingsModel arg)
+       private async Task<IEnumerable<LoggedPrecacheSearchItem>> GetLoggedPrecacheSearchItems(PlatformSettingsRequestModel request, PlatformSettingsQuery arg)
         {
             var sql = "SELECT [ID]" +
                 "      ,[HomePageSearchType]" +
@@ -158,7 +161,7 @@ namespace PrecacheManagerServer.BLL.Services
                 "      ,[ErrorMessage]" +
                 "      ,[PrecacheIntegrityKey]" +
                 "         FROM[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetSchemaName() + "].[" + PrecacheDbTable.LoggedPrecacheSearchItem.GetTableName() + "]" +
-                "  WHERE applicationMode = " + (int)request.Connections.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
+                "  WHERE applicationMode = " + (int)request.ConnectionStrings.Keys.First().GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId + "";
 
             arg.Sql = sql;
 
@@ -169,7 +172,8 @@ namespace PrecacheManagerServer.BLL.Services
             return loggedPrecacheSearchesQuery;
         }
 
-        private async Task<IEnumerable<PrecacheSearchPlus>> GetPrecacheSearchPlusItems(PlatformSettingsModel arg, int appMode)
+        //private async Task<IEnumerable<PrecacheSearchPlus>> GetPrecacheSearchPlusItems(PlatformSettingsModel arg, int appMode)
+            private async Task<IEnumerable<PrecacheSearchPlus>> GetPrecacheSearchPlusItems(PlatformSettingsQuery arg, int appMode)
         {
             //replace this with a more complex where query
             var sql = "SELECT psi.[ID]" +
@@ -492,7 +496,8 @@ namespace PrecacheManagerServer.BLL.Services
 
             //need to get the id column for the type in question
 
-            var arg = _mapper.Map<PlatformSettingsModel>(request);
+            //var arg = _mapper.Map<PlatformSettingsModel>(request);
+            var arg = _mapper.Map<PlatformSettingsQuery>(request);
             arg.Where.Add("id", id.ToString());
 
             return _mapper.Map<PrecacheSearchPlus, PlatformOverviewResponseModel>(await _precacheSearchPlusService.GetById(arg));
