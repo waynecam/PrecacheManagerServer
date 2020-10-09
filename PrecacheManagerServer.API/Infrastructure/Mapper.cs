@@ -7,7 +7,6 @@ using PrecacheManagerServer.DAL.Models;
 using PrecacheManagerServer.BLL.Models;
 using PrecacheManagerServer.API.Models;
 using System.Data;
-using PrecacheManagerServer.DAL.Enums;
 using PrecacheRerunApi = PrecacheManagerServer.API.Models.PrecacheRerun;
 using PrecacheRerunDal= PrecacheManagerServer.DAL.Models.PrecacheRerun;
 using User = PrecacheManagerServer.DAL.Models.User;
