@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.14.6" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrecacheManagerServer.API\PrecacheManagerServer.API.csproj" />
+    <ProjectReference Include="..\PrecacheManagerServer.BLL\PrecacheManagerServer.BLL.csproj" />
+    <ProjectReference Include="..\PrecacheManagerServer.DAL\PrecacheManagerServer.DAL.csproj" />
+    <ProjectReference Include="..\PrecacheManagerServer.Shared\PrecacheManagerServer.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

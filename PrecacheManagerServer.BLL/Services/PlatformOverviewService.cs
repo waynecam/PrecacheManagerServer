@@ -30,7 +30,7 @@ namespace PrecacheManagerServer.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<PlatformOverviewResponseModel>> GetAsync(PlatformSettingsRequestModel request)
+        public virtual async Task<IEnumerable<PlatformOverviewResponseModel>> GetAsync(PlatformSettingsRequestModel request)
         {
             //var arg = _mapper.Map<PlatformSettingsModel>(request);
             var arg =  _mapper.Map<PlatformSettingsQuery>(request);

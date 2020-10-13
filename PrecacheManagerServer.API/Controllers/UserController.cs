@@ -32,7 +32,7 @@ namespace PrecacheManagerServer.Controllers
         }
 
 
-        public User CurrentUser
+        public virtual User CurrentUser
         {
             get
             {
