@@ -15,11 +15,11 @@ using Shouldly;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class PlatformOverviewTests
+    public class PlatformOverviewControllerTests
     {
 
         
-        public PlatformOverviewTests()
+        public PlatformOverviewControllerTests()
         {
             //some initialize stuff here
         }
