@@ -46,7 +46,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
             //});
 
 
-            mockPlatformOverviewService.Setup(a => a.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).ReturnsAsync(GetPlatformOverviewResponseModel(applicationMode));
+            mockPlatformOverviewService.Setup(a => a.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).ReturnsAsync(GetTestPlatformOverviewResponseModel(applicationMode));
 
             var mockController = new Mock<PlatformOverviewController>(mockServiceProvider.Object, mockPlatformOverviewService.Object, mockPlatformSettings.Object);
 
