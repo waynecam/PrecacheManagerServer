@@ -46,7 +46,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
             //});
 
 
-            mockPlatformOverviewService.Setup(a => a.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).ReturnsAsync(GetPlatformOverviewResponse(applicationMode));
+            mockPlatformOverviewService.Setup(a => a.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).ReturnsAsync(GetPlatformOverviewResponseModel(applicationMode));
 
             var mockController = new Mock<PlatformOverviewController>(mockServiceProvider.Object, mockPlatformOverviewService.Object, mockPlatformSettings.Object);
 
@@ -77,6 +77,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
         }
 
 
+        #region Helper Methods
 
         public PrecacheManagerServer.API.Models.User GetTestUser()
         {
@@ -91,7 +92,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
         }
 
 
-        public List<PlatformOverviewResponseModel> GetPlatformOverviewResponse(ApplicationMode appMode)
+        public List<PlatformOverviewResponseModel> GetTestPlatformOverviewResponseModel(ApplicationMode appMode)
         {
             var result = new List<PlatformOverviewResponseModel>();
 
@@ -154,6 +155,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
             return result;
         }
 
+        #endregion
 
     }
 }
