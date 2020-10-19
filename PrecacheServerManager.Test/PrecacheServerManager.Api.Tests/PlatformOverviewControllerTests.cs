@@ -15,7 +15,7 @@ using Shouldly;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class PlatformOverviewControllerTests
+    public class PlatformOverviewControllerTests :TestBase
     {
 
         
@@ -27,15 +27,15 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
         [InlineData(ApplicationMode.GermanyMedia, 2)]
         [InlineData(ApplicationMode.International, 3)]
         [InlineData(ApplicationMode.Australia, 1)]
-        public async Task ShouldReturnGermanyInternationalAustraliaPlatformOverviewsWithPrecacheSites(ApplicationMode applicationMode, int expectedPrecacheSiteCount)
+        public async Task ShouldReturnGermanyInternationalAustraliaPlatformOverviewsWithPrecacheSitesTest(ApplicationMode applicationMode, int expectedPrecacheSiteCount)
         {
             var mockPlatformOverviewService = new Mock<IPlatformOverviewService>();
 
             mockPlatformOverviewService.CallBase = true;
 
-            var mockServiceProvider = new Mock<IServiceProvider>();
+            //var mockServiceProvider = new Mock<IServiceProvider>();
 
-            var mockPlatformSettings = new Mock<IPlatformSettings>();
+            //var mockPlatformSettings = new Mock<IPlatformSettings>();
 
             //mockPlatformOverviewService.Setup(x => x.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).Returns(Task.FromResult(GetPlatformOverviewResponse() as IEnumerable<PlatformOverviewResponseModel>));
             //mockPlatformOverviewService.Setup(x => x.GetAsync(It.IsAny<PlatformSettingsRequestModel>())).ReturnsAsync(GetPlatformOverviewResponse());
@@ -50,7 +50,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
             var mockController = new Mock<PlatformOverviewController>(mockServiceProvider.Object, mockPlatformOverviewService.Object, mockPlatformSettings.Object);
 
-            mockController.SetupGet(x => x.CurrentUser).Returns(GetTestUser());
+            mockController.SetupGet(x => x.CurrentUser).Returns(GetTestUser(applicationMode));
 
             
 
@@ -78,18 +78,6 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
 
         #region Helper Methods
-
-        public PrecacheManagerServer.API.Models.User GetTestUser()
-        {
-            var u = new PrecacheManagerServer.API.Models.User();
-
-            u.ApplicationModes = new List<ApplicationMode>() { ApplicationMode.GermanyMedia };
-            u.PlatformSettings = new PlatformSettings() { ConnectionStrings = new Dictionary<ApplicationMode, string>()};
-            u.PlatformSettings.ConnectionStrings.Add(ApplicationMode.GermanyMedia, "");
-            u.UserName = "Test";
-
-            return u;
-        }
 
 
         public List<PlatformOverviewResponseModel> GetTestPlatformOverviewResponseModel(ApplicationMode appMode)

@@ -92,9 +92,9 @@ namespace PrecacheManagerServer.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{applicationMode}/{siteId}")]
+        [Route("[action]/{applicationModeId}/{siteId}")]
         //public async Task<IEnumerable<PrecacheSearchResponseModel>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
-        public async Task<IResultMessage<IEnumerable<PrecacheSearchResponseModel>>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
+        public async Task<IResultMessage<IEnumerable<PrecacheSearchResponseModel>>> GetByApplicationModeAndSiteId(int applicationModeId, int siteId)
         {
             var data = new List<PrecacheSearchResponseModel>();
             var result = new ResultMessage<IEnumerable<PrecacheSearchResponseModel>>()
@@ -109,7 +109,7 @@ namespace PrecacheManagerServer.Controllers
                 foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
                     {
 
-                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationModeId)
                     {
                         var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
