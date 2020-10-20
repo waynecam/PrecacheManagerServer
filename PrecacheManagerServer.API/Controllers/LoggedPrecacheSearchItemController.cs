@@ -10,19 +10,19 @@ using PrecacheManagerServer.BLL.Services;
 //using PrecacheManagerServer.BLL.Enums.Extensions;
 using PrecacheManagerServer.Shared.Models;
 using PrecacheManagerServer.Shared.Enums.Extensions;
-
+using PrecacheManagerServer.Controllers;
 
 namespace PrecacheManagerServer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoggedPrecacheSearchItemController : ControllerBase
+    public class LoggedPrecacheSearchItemController : UserController
     {
 
         ILoggedPrecacheSearchItemService _service;
         IPlatformSettings _platformSettings;
 
-        public LoggedPrecacheSearchItemController(ILoggedPrecacheSearchItemService service, IPlatformSettings platformSetting)
+        public LoggedPrecacheSearchItemController(IServiceProvider serviceProvider, ILoggedPrecacheSearchItemService service, IPlatformSettings platformSetting) :base(serviceProvider)
         {
             _service = service;
             _platformSettings = platformSetting;
@@ -52,8 +52,8 @@ namespace PrecacheManagerServer.API.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{applicationMode}")]
-        public async Task<IResultMessage<IEnumerable<LoggedPrecacheSearchItemResponseModel>>> GetByApplicationMode(int applicationMode)
+        [Route("[action]/{applicationModeId}")]
+        public async Task<IResultMessage<IEnumerable<LoggedPrecacheSearchItemResponseModel>>> GetByApplicationMode(int applicationModeId)
         {
             var data = new List<LoggedPrecacheSearchItemResponseModel>();
 
@@ -67,7 +67,7 @@ namespace PrecacheManagerServer.API.Controllers
                 foreach (var key in _platformSettings.ConnectionStrings.Keys)
                 {
 
-                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                    if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationModeId)
                     {
                         var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
@@ -99,27 +99,37 @@ namespace PrecacheManagerServer.API.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{applicationMode}/{siteId}")]
-        public async Task<IEnumerable<LoggedPrecacheSearchItemResponseModel>> GetByApplicationModeAndSiteId(int applicationMode, int siteId)
+        [Route("[action]/{applicationModeId}/{siteId}")]
+        public async Task<IResultMessage<List<LoggedPrecacheSearchItemResponseModel>>> GetByApplicationModeAndSiteId(int applicationModeId, int siteId)
         {
-            var result = new List<LoggedPrecacheSearchItemResponseModel>();
+            //var result = new List<LoggedPrecacheSearchItemResponseModel>();
 
+            var result = new ResultMessage<List<LoggedPrecacheSearchItemResponseModel>>()
+            {
+                Success = true
+            };
 
-            foreach (var key in _platformSettings.ConnectionStrings.Keys)
+            var data = new List<LoggedPrecacheSearchItemResponseModel>();
+
+            foreach (var key in CurrentUser.PlatformSettings.ConnectionStrings.Keys)
             {
 
-                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationMode)
+                if ((int)key.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId == applicationModeId)
                 {
                     var platformSettingsRequestModel = new PlatformSettingsRequestModel();
 
-                    platformSettingsRequestModel.ConnectionStrings.Add(key, _platformSettings.ConnectionStrings[key]);
+                    platformSettingsRequestModel.ConnectionStrings.Add(key, CurrentUser.PlatformSettings.ConnectionStrings[key]);
 
                     var r = await _service.GetAsync(platformSettingsRequestModel);
 
-                    result.AddRange(r.ToList().Where(x => x.SiteId == siteId));
+
+
+                    data.AddRange(r.ToList().Where(x => x.SiteId == siteId));
                     //result.AddRange(r.ToList());
                 }
             }
+
+
 
             var testloggedPrecacheSarchItem = new LoggedPrecacheSearchItemResponseModel()
             {
@@ -134,7 +144,15 @@ namespace PrecacheManagerServer.API.Controllers
 
             };
 
-            result.Add(testloggedPrecacheSarchItem);
+
+
+            //result.Add(testloggedPrecacheSarchItem);
+
+            result.Data = new List<LoggedPrecacheSearchItemResponseModel> { testloggedPrecacheSarchItem };
+
+            //result.Data = data;
+
+
 
             return result;
         }
