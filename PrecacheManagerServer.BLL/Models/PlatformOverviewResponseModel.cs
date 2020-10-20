@@ -18,6 +18,8 @@ namespace PrecacheManagerServer.BLL.Models
 
         public ApplicationMode ApplicationMode { get; set; }
 
+        public int ApplicationModeId { get; set; }
+
         public string PlatformDescription { get { return ApplicationMode.GetAttribute<ApplicationModeFriendlyDescriptionAttribute>().ApplicationModeFriendlyDescription; } }
 
         public List<PrecacheSite> PrecacheSites { get; set; }

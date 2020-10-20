@@ -57,7 +57,12 @@ namespace PrecacheManagerServer.BLL.Services
         {
             var platformOverviewRM = new PlatformOverviewResponseModel();
 
-            platformOverviewRM.ApplicationMode = precacheSearchsQuery.Select(x => x.ApplicationMode).FirstOrDefault();
+            var appMode = precacheSearchsQuery.Select(x => x.ApplicationMode).FirstOrDefault();
+
+            platformOverviewRM.ApplicationMode = appMode;
+
+            platformOverviewRM.ApplicationModeId = appMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
+
 
             //get the distinct precacheSites
             var precacheSites = new List<PrecacheSite>();
