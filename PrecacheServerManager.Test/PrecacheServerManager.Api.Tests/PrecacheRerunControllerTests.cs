@@ -15,6 +15,8 @@ using Shouldly;
 using System.Linq;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.API.Controllers;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
@@ -51,6 +53,48 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
         }
 
+
+        [Theory]
+        [InlineData(ApplicationMode.GermanyMedia, "157ae001-cdb2-44c2-9356-c1e97cc6681a", false)]
+        public async Task RerunPrecacheSearchFailedModelStateTest(ApplicationMode appMode, string precacheIntegrityKey, bool expectedResult)
+        {
+
+            var mockPrecacheRerunService = new Mock<IPrecacheRerunService>();
+
+            mockPrecacheRerunService.Setup(a => a.AddOrUpdateSP(It.IsAny<PlatformSettingRequestsModelAddOrUpdate<PrecacheManagerServer.API.Models.PrecacheRerun>>())).ReturnsAsync(expectedResult);
+
+            var mockPlatformsEttings = new Mock<IPlatformSettings>();
+
+            var mockPrecacheRerunController = new Mock<PrecacheRerunController>(mockServiceProvider.Object, mockPrecacheRerunService.Object, mockPlatformSettings.Object);
+
+            mockPrecacheRerunController.CallBase = true;
+
+            mockPrecacheRerunController.Setup(a => a.CurrentUser).Returns(GetTestUser(appMode));
+
+            var precacheRerun = GetTestPrecacheRerun(precacheIntegrityKey, appMode);
+
+            SimulateValidation(precacheRerun, mockPrecacheRerunController.Object);
+
+            var appModeId = appMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
+
+            //var result = await mockPrecacheRerunController.Object.RerunFailedPrecacheSearch(appModeId, precacheRerun);
+
+            await Task.Run(() =>
+            {
+                Should.Throw<HttpRequestException>(async () => await mockPrecacheRerunController.Object.RerunFailedPrecacheSearch(appModeId, precacheRerun));
+            });
+            //var result = await mockPrecacheRerunController.Object.RerunFailedPrecacheSearch(appModeId, precacheRerun);
+
+            //result.ShouldBeOfType(typeof(InvalidModelStateResult));
+
+           
+
+
+            //result.Data.ShouldBe(expectedResult);
+
+
+        }
+
         #region Helper Methods
         private PrecacheManagerServer.API.Models.PrecacheRerun GetTestPrecacheRerun(string precacheIntegrityKey, ApplicationMode applicationMode)
         {
@@ -66,16 +110,32 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
                     precacheRerun.Applicationmode = applicationMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
                     break;
                 case "2d021543-0140-4577-b5fa-ec48a777273f":
-                    //this will cause a failure
-
+                    precacheRerun.PrecacheIntegrityKey = Guid.Parse(precacheIntegrityKey);
+                    precacheRerun.Applicationmode = applicationMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
                     break;
-
+                case "157ae001-cdb2-44c2-9356-c1e97cc6681a":
+                    precacheRerun.SiteId = -1;
+                    //returns an incomplete model
+                    break;
             }
 
 
 
             return precacheRerun;
 
+        }
+
+
+        private void SimulateValidation(object model, PrecacheRerunController controller)
+        {
+            // mimic the behaviour of the model binder which is responsible for Validating the Model
+            var validationContext = new ValidationContext(model, null, null);
+            var validationResults = new List<ValidationResult>();
+            Validator.TryValidateObject(model, validationContext, validationResults, true);
+            foreach (var validationResult in validationResults)
+            {
+                controller.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
+            }
         }
 
         #endregion
