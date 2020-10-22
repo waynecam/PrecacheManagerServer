@@ -17,7 +17,7 @@ namespace PrecacheManagerServer.BLL.Repositorys
         //Task AddOrUpdate<TData>(PlatformSettingsModelAddOrUpdate<TData> request);
         //Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request);
         Task AddOrUpdate<TData>(PlatformSettingsQueryAddUpdate<TData> request);
-        Task AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request);
+        Task<bool> AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request);
 
     }
 }

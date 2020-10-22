@@ -10,6 +10,6 @@ namespace PrecacheManagerServer.BLL.Services
     {
         Task AddOrUpdate<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
 
-        Task AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
+        Task<bool> AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request);
     }
 }

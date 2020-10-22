@@ -77,15 +77,15 @@ namespace PrecacheManagerServer.BLL.Repositorys
         {
             var conn = new SqlConnection(request.ConnectionStrings[request.ConnectionStrings.Keys.First()]);
 
-            await _dbContext.AddOrUpdate(request.Sql, request.SqlParameters, conn);
+             await _dbContext.AddOrUpdate(request.Sql, request.SqlParameters, conn);
         }
 
         //public async Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
-        public async Task AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request)
+        public async Task<bool> AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request)
         {
             var conn = new SqlConnection(request.ConnectionStrings[request.ConnectionStrings.Keys.First()]);
 
-            await _dbContext.AddOrUpdateSP(request.Sql, request.SqlParameters, conn);
+            return await _dbContext.AddOrUpdateSP(request.Sql, request.SqlParameters, conn);
         }
 
         //public async Task<IEnumerable<T>> Where(PlatformSettingsModel request, string sql)

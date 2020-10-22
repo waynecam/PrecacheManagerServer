@@ -39,11 +39,13 @@ namespace PrecacheManagerServer.BLL.Services
 
 
         //public async Task AddOrUpdateSP<TData>(PlatformSettingsModelAddOrUpdate<TData> request)
-        public async Task AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request)
+        public async Task<bool> AddOrUpdateSP<TData>(PlatformSettingsQueryAddUpdate<TData> request)
         {
             //_repository.addOrUpdate()
 
-            await Task.Run(() => { _repository.AddOrUpdateSP(request); });
+            //return await Task.Run(() => { _repository.AddOrUpdateSP(request); });
+
+            return await  _repository.AddOrUpdateSP(request);
         }
 
 

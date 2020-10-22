@@ -84,32 +84,38 @@ namespace PrecacheManagerServer.DAL.Contexts
         {
             await Task.Run(() =>
             {
-                using (var command = new SqlCommand(sql, conn))
-                {
-                    command.Parameters.AddRange(parameters.ToArray());
-                    command.ExecuteNonQuery();
-                }
-
-                return true;
-            });
-        }
-      public async Task AddOrUpdateSP(string sql, List<SqlParameter> parameters, SqlConnection conn)
-            {
-                await Task.Run(() =>
-                {
                     using (var command = new SqlCommand(sql, conn))
                     {
-                        conn.Open();
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.CommandText = sql;
                         command.Parameters.AddRange(parameters.ToArray());
-                        var result = command.ExecuteNonQuery();
-
+                        command.ExecuteNonQuery();
                     }
 
-
-
                     return true;
+               
+            });
+        }
+      public async Task<bool> AddOrUpdateSP(string sql, List<SqlParameter> parameters, SqlConnection conn)
+            {
+
+
+               return await Task.Run(() =>
+                {
+                    try
+                    {
+                        using (var command = new SqlCommand(sql, conn))
+                        {
+                            conn.Open();
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.CommandText = sql;
+                            command.Parameters.AddRange(parameters.ToArray());
+                            var result = command.ExecuteNonQuery();
+
+                        }
+                        return true;
+                    }catch(Exception ex)
+                    {
+                        return false;
+                    }
                 });
             }
 

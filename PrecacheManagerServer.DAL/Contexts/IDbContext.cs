@@ -12,7 +12,7 @@ namespace PrecacheManagerServer.DAL.Contexts
 
         Task AddOrUpdate(string sql, List<SqlParameter> parameters, SqlConnection conn);
 
-        Task AddOrUpdateSP(string sql, List<SqlParameter> parameters, SqlConnection conn);
+        Task<bool> AddOrUpdateSP(string sql, List<SqlParameter> parameters, SqlConnection conn);
 
     }   
 }

@@ -57,7 +57,7 @@ namespace PrecacheManagerServer.BLL.Services
 
 
         }
-        public async Task AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
+        public async Task<bool> AddOrUpdateSP<T>(PlatformSettingRequestsModelAddOrUpdate<T> request)
         {
             //var arg = _mapper.Map<PlatformSettingsModelAddOrUpdate<T>>(request);
             var arg = _mapper.Map<PlatformSettingsQueryAddUpdate<T>>(request);
@@ -74,7 +74,7 @@ namespace PrecacheManagerServer.BLL.Services
 
             arg.SqlParameters.Add(paramater1);
 
-            await _service.AddOrUpdateSP(arg);
+            return await _service.AddOrUpdateSP(arg);
         }
     }
 }
