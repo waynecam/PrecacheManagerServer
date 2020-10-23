@@ -15,7 +15,6 @@ using Shouldly;
 using System.Linq;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.API.Controllers;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
@@ -73,7 +72,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
             var precacheRerun = GetTestPrecacheRerun(precacheIntegrityKey, appMode);
 
-            SimulateValidation(precacheRerun, mockPrecacheRerunController.Object);
+            SimulateModelValidation(precacheRerun, mockPrecacheRerunController.Object);
 
             var appModeId = appMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
 
@@ -124,19 +123,6 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
             return precacheRerun;
 
-        }
-
-
-        private void SimulateValidation(object model, PrecacheRerunController controller)
-        {
-            // mimic the behaviour of the model binder which is responsible for Validating the Model
-            var validationContext = new ValidationContext(model, null, null);
-            var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(model, validationContext, validationResults, true);
-            foreach (var validationResult in validationResults)
-            {
-                controller.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
-            }
         }
 
         #endregion
