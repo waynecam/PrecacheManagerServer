@@ -81,6 +81,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
             await Task.Run(() =>
             {
+                //https://stackoverflow.com/questions/40543708/testing-exception-messages-with-shouldly
                 Should.Throw<HttpRequestException>(async () => await mockPrecacheRerunController.Object.RerunFailedPrecacheSearch(appModeId, precacheRerun));
             });
             //var result = await mockPrecacheRerunController.Object.RerunFailedPrecacheSearch(appModeId, precacheRerun);
