@@ -28,7 +28,7 @@ namespace PrecacheManagerServer.Controllers
             //https://stackoverflow.com/questions/21916020/base-controller-constructor-injection-in-asp-net-mvc-with-unity
             _platformSettings = (PlatformSettings)serviceProvider.GetService(typeof(IPlatformSettings));
 
-            _platformConfigService = (PlatformConfigService)serviceProvider.GetService(typeof(IPlatformConfigService));
+            _platformConfigService = (IPlatformConfigService)serviceProvider.GetService(typeof(IPlatformConfigService));
         }
 
 
@@ -40,7 +40,7 @@ namespace PrecacheManagerServer.Controllers
             }
         }
 
-        private User BuildCurrentUser()
+        public User BuildCurrentUser()
         {
             var user = new User();
 
