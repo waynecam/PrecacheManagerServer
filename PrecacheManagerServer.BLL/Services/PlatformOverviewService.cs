@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using PrecacheManagerServer.Shared.Enums.Extensions;
 using PrecacheManagerServer.Shared.Enums;
 using PrecacheManagerServer.Shared.Models;
+using PrecacheManagerServer.Shared.ExtensionMethods;
 
 namespace PrecacheManagerServer.BLL.Services
 {
@@ -85,8 +86,8 @@ namespace PrecacheManagerServer.BLL.Services
                 {
                     Id = x.Id,
                     AreaNo = x.AreaNo,
-                    CreatedDate = x.CreatedDate,
-                    LastUpdateDate = x.LastUpdateDate,
+                    CreatedDate = x.CreatedDate.FormattedDateAndTime(),
+                    LastUpdateDate = x.LastUpdateDate.FormattedDateAndTime(),
                     IsDeleted = x.IsDeleted,
                     DashboardSearchType = x.DashboardSearchType,
                     SearchId = x.SearchId,
