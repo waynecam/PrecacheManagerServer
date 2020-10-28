@@ -75,7 +75,7 @@ namespace PrecacheManagerServer.API.Services
                 signingCredentials: credentials
             );
             token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
-            return true;
+            return token != string.Empty;
 
         }
     }
