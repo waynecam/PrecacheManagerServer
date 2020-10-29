@@ -15,7 +15,7 @@ using Shouldly;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class PlatformOverviewControllerTests :TestBase
+    public class PlatformOverviewControllerTests :APITestbase
     {
 
         

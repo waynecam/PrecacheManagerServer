@@ -26,7 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-   public class AuthenticationControllerTests :TestBase
+   public class AuthenticationControllerTests :APITestbase
     {
 
         [Fact]

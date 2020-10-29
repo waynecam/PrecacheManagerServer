@@ -19,7 +19,7 @@ using System.Net.Http;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class PrecacheRerunControllerTests :TestBase
+    public class PrecacheRerunControllerTests :APITestbase
     {
         [Theory]
         [InlineData(ApplicationMode.GermanyMedia, "c3c9279c-c43f-4677-8722-638fd258ee1c", true)]

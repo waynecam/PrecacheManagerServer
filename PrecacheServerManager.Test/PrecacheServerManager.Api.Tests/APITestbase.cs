@@ -15,15 +15,16 @@ using Shouldly;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using PrecacheServerManager.Test.Shared;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class TestBase
+    public class APITestbase : SharedTestbase
     {
         internal Mock<IServiceProvider> mockServiceProvider;
         internal Mock<IPlatformSettings> mockPlatformSettings;
 
-        public TestBase()
+        public APITestbase()
         {
            mockServiceProvider = new Mock<IServiceProvider>();
            mockPlatformSettings = new Mock<IPlatformSettings>();
@@ -56,15 +57,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
         }
 
 
-        protected Dictionary<ApplicationMode, string> GetTestPlatformConfigServiceConnStrings()
-        {
-            var connectionStrings = new Dictionary<ApplicationMode, string>();
-            //ConnectionStrings.Add(ApplicationMode.Australia, $"Connection Timeout=300;Data Source=SYDWINSQLP001;Initial Catalog=PortfolioManagementAUS;persist security info=True;user id=LinkedServerUser;password=7XvAAkG82b6vDECypojf;");
-            connectionStrings.Add(ApplicationMode.International, $"Connection Timeout=300;Data Source=10.236.234.20\\PortfolioINT;Initial Catalog=PortfolioManagementINT;persist security info=True;Integrated Security=True;");
-            connectionStrings.Add(ApplicationMode.GermanyMedia, $"Connection Timeout=300;Data Source=10.236.234.20\\PORTFOLIOGER;initial catalog=PortfolioManagementGER;persist security info=True;Integrated Security=True;");
-
-            return connectionStrings;
-        }
+       
 
         #endregion
     }

@@ -22,7 +22,7 @@ using PrecacheManagerServer.API.Services;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class UserControllerTests :TestBase
+    public class UserControllerTests :APITestbase
     {
 
 
@@ -33,7 +33,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 
             var mockPlatformServiceConfigs = new Mock<IPlatformConfigService>();
 
-            mockPlatformServiceConfigs.Setup(a => a.ConnectionStrings).Returns(GetTestPlatformConfigServiceConnStrings());
+            mockPlatformServiceConfigs.Setup(a => a.ConnectionStrings).Returns(GetTestPlatformConnStrings());
 
             mockServiceProvider.Setup(a => a.GetService(typeof(IPlatformConfigService))).Returns(mockPlatformServiceConfigs.Object);
 

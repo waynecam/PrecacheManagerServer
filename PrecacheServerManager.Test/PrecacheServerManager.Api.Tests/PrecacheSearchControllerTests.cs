@@ -17,7 +17,7 @@ using PrecacheManagerServer.Shared.Enums.Extensions;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class PrecacheSearchControllerTests :TestBase
+    public class PrecacheSearchControllerTests :APITestbase
     {
 
 

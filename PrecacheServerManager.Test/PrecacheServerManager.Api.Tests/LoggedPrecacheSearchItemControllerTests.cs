@@ -18,7 +18,7 @@ using PrecacheManagerServer.API.Controllers;
 
 namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
 {
-    public class LoggedPrecacheSearchItemControllerTests :TestBase
+    public class LoggedPrecacheSearchItemControllerTests :APITestbase
     {
 
         [Theory]
