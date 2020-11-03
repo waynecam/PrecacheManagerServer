@@ -27,7 +27,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.Api.Tests
         [InlineData(ApplicationMode.GermanyMedia,20, 2)]
         [InlineData(ApplicationMode.International,21, 1)]
         //[InlineData(ApplicationMode.Australia,22, 3)]
-        public async Task ShouldReturnPrecacheSearchesByApplicationModeAndSiteIdTest(ApplicationMode applicationMode,int siteId, int expectedPrecacheSearchesCount)
+        public async Task GetPrecacheSearchesByApplicationModeAndSiteIdTest(ApplicationMode applicationMode,int siteId, int expectedPrecacheSearchesCount)
         {
 
             var mockPrecacheSearchService = new Mock<IPrecacheSearchService>();

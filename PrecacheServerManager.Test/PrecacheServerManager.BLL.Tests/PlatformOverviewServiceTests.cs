@@ -95,15 +95,7 @@ namespace PrecacheServerManager.Test.PrecacheServerManager.BLL.Tests
 
         #region helper methods
 
-        protected void SetupFakeMapper(IMapper mapper)
-        {
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            mapper = mappingConfig.CreateMapper();
-        }
+       
 
 
         private IEnumerable<PrecacheSearchPlus> GetFakePrecacheSearchPlusResult(int appModeId)
