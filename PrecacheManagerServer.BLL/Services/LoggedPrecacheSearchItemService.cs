@@ -55,8 +55,19 @@ namespace PrecacheManagerServer.BLL.Services
 
 
             var result = await _service.GetAsync(arg);
+            var finalMappedResult = new List<LoggedPrecacheSearchItemResponseModel>();
 
-            return result.Select(t => _mapper.Map<LoggedPrecacheSearchItem, LoggedPrecacheSearchItemResponseModel>(t));
+            //return result.Select(t => _mapper.Map<LoggedPrecacheSearchItem, LoggedPrecacheSearchItemResponseModel>(t));
+
+            foreach(var loggedPrecacheSearchItem in result.ToList())
+            {
+                var mappedResult = _mapper.Map<LoggedPrecacheSearchItemResponseModel>(loggedPrecacheSearchItem);
+
+                finalMappedResult.Add(mappedResult);
+                
+            }
+
+            return finalMappedResult;
 
 
 

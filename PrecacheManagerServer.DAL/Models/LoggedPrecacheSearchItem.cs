@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PrecacheManagerServer.Shared.Enums;
+using PrecacheManagerServer.Shared.Enums.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +27,15 @@ namespace PrecacheManagerServer.DAL.Models
         public int SearchVersion { get; set; }
 
         public int ApplicationMode { get; set; }
+
+        public int ApplicationModeId
+        {
+            get
+            {
+                var appMode = (ApplicationMode)this.ApplicationMode;
+                return appMode.GetAttribute<ApplicationModeIdAttribute>().ApplicationModeId;
+            }
+        }
 
         public int AreaNo { get; set; }
 
