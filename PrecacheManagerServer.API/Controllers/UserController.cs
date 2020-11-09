@@ -40,6 +40,7 @@ namespace PrecacheManagerServer.Controllers
             }
         }
 
+        [NonAction]
         public User BuildCurrentUser()
         {
             var user = new User();

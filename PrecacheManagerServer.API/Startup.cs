@@ -96,6 +96,8 @@ namespace PrecacheManagerServer
 
             services.AddScoped<IPlatformConfigService, PlatformConfigService>();
 
+            services.AddSwaggerGen();
+
             Installer.ConfigureServices(services);
         }
 
@@ -123,7 +125,13 @@ namespace PrecacheManagerServer
                 .AllowAnyHeader()
                 .AllowCredentials()
             );
+            app.UseSwagger();
+            app.UseSwaggerUI(a =>
+            {
 
+                a.SwaggerEndpoint("/swagger/v1/swagger.json", "PrecacheManagerServer API");
+
+            });
 
             app.UseAuthentication();//adds the authenticatrion middleware
             app.UseHttpsRedirection();
